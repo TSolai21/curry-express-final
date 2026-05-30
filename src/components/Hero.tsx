@@ -18,7 +18,7 @@ export default function Hero({ onViewMenu }: HeroProps) {
   const words = heroContent.title.split(' ');
 
   return (
-    <div className="relative bg-stone-950 text-white min-h-[580px] lg:min-h-[680px] flex items-center overflow-hidden pt-20" id="home">
+    <div className="relative bg-stone-950 text-white min-h-screen lg:min-h-[680px] flex items-center overflow-hidden pt-20" id="home">
       <motion.div
         className="absolute inset-0 z-0"
         initial={{ scale: 1.08, opacity: 0 }}
