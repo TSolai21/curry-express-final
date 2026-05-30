@@ -49,7 +49,7 @@ export default function ScrollToTop() {
     >
       <button 
         onClick={scrollToTop}
-        className="relative group flex items-center justify-center w-[52px] h-[52px] bg-transparent rounded-full focus:outline-none transition-transform active:scale-95"
+        className="relative group flex cursor-pointer items-center justify-center w-[52px] h-[52px] bg-transparent rounded-full focus:outline-none transition-transform active:scale-95"
         aria-label="Scroll to top"
       >
         <svg className="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none" viewBox="0 0 52 52">

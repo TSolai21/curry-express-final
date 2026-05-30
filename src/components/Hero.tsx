@@ -1,4 +1,5 @@
 import { ChevronRight } from 'lucide-react';
+import FillHoverButton from './FillHoverButton';
 import { motion } from 'motion/react';
 import burgerImage from '../assets/images/burger_hero_foreground.png';
 import { childFadeInUp, easeOut, staggerContainer } from '../utils/motion';
@@ -36,11 +37,8 @@ export default function Hero({ onViewMenu }: HeroProps) {
           initial="hidden"
           animate="visible"
         >
-          <motion.span
-            variants={childFadeInUp}
-            className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#ea580c] block uppercase"
-          >
-            {heroContent.subtitle}
+          <motion.span variants={childFadeInUp} className="inline-block">
+            <span className="ransom-band text-[10px] sm:text-xs">{heroContent.subtitle}</span>
           </motion.span>
 
           <motion.h1
@@ -64,22 +62,23 @@ export default function Hero({ onViewMenu }: HeroProps) {
           </motion.h1>
 
           <motion.div variants={childFadeInUp} className="pt-5 flex justify-center">
-            <motion.button
-              onClick={onViewMenu}
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              className="bg-[#ea580c] hover:bg-[#c2410c] text-white px-8 py-3.5 rounded-sm font-bold text-xs tracking-widest uppercase transition-colors duration-300 inline-flex items-center gap-2 group cursor-pointer shadow-lg hover:shadow-orange-900/30"
-              id="hero-view-menu-btn"
-            >
-              VIEW MENU
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </motion.button>
+            <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.97 }}>
+              <FillHoverButton
+                variant="outline"
+                onClick={onViewMenu}
+                className="px-8 py-3.5 rounded-sm text-xs tracking-widest uppercase shadow-lg hover:shadow-orange-900/30"
+                id="hero-view-menu-btn"
+              >
+                VIEW MENU
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </FillHoverButton>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
 
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-8 bg-[#FDFBF7] rounded-t-[100%] pointer-events-none z-10"
+        className="absolute bottom-0 left-0 right-0 h-8 bg-warm-white rounded-t-[100%] pointer-events-none z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.5, ease: easeOut }}

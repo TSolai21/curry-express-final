@@ -45,10 +45,10 @@ export default function Offers() {
           whileInView="visible"
           viewport={viewport}
         >
-          <motion.span variants={childFadeInUp} className="text-xs font-bold tracking-[0.3em] text-[#ea580c] block uppercase mb-2 font-mono">
+          <motion.span variants={childFadeInUp} className="text-eyebrow block mb-2">
             This Week
           </motion.span>
-          <motion.h2 variants={childFadeInUp} className="text-3xl md:text-4xl font-black text-white tracking-tight font-sans">
+          <motion.h2 variants={childFadeInUp} className="text-3xl md:text-4xl font-bold text-white tracking-tight">
             Deals & Combos
           </motion.h2>
           <motion.div variants={childFadeInUp} className="w-20 h-1 bg-[#ea580c] mx-auto mt-3 rounded-full" />
@@ -70,13 +70,13 @@ export default function Offers() {
               {/* Text content */}
               <div className="flex flex-col justify-between flex-1 p-5 sm:p-6 min-h-[160px]">
                 <div className="space-y-2">
-                  <span className="text-[#ea580c] font-bold text-xs tracking-[0.2em] uppercase">
+                  <span className="text-[#ea580c] font-bold text-xs tracking-wide uppercase">
                     {offer.discount}
                   </span>
                   <h3 className="text-white font-bold text-xl sm:text-2xl leading-tight">
                     {offer.title}
                   </h3>
-                  <p className="text-stone-400 text-sm leading-relaxed max-w-sm">
+                  <p className="text-stone-300 text-base leading-relaxed max-w-sm">
                     {offer.desc}
                   </p>
                 </div>

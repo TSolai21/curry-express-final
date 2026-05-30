@@ -64,7 +64,7 @@ export default function Features() {
                 <h4 className="text-white font-bold text-lg font-sans leading-tight">
                   {feat.title}
                 </h4>
-                <p className="text-stone-300 text-sm leading-relaxed">
+                <p className="text-stone-300 text-base leading-relaxed">
                   {feat.description}
                 </p>
               </div>

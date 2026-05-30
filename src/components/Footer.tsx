@@ -28,20 +28,20 @@ export default function Footer({ onNavigate }: FooterProps) {
   };
 
   return (
-    <footer className="bg-[#FAF8F5] text-stone-800 border-t border-stone-200/80 pt-20 pb-8" id="footer">
+    <footer className="bg-warm-surface text-stone-800 border-t border-warm-border/80 pt-20 pb-8" id="footer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 items-start mb-16 text-left">
           <div className="lg:col-span-4 space-y-5">
-            <Link to="/" onClick={() => onNavigate('home')}>
+            <Link to="/" onClick={() => onNavigate('home')} className="cursor-pointer inline-block">
               <img src="/logo.jpg" alt="Curry Express Logo" className="h-12 w-auto object-contain rounded-full shadow-sm" />
             </Link>
-            <p className="text-xs text-stone-500 leading-relaxed font-sans max-w-sm">
+            <p className="text-sm text-stone-700 leading-relaxed max-w-sm">
               Indian and Indo-Chinese food on Walden Road. Dine in, take out, or order delivery — open daily 11 to 9:30.
             </p>
           </div>
 
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="font-extrabold text-xs tracking-wider uppercase text-stone-900 border-b border-stone-200 pb-2">
+            <h4 className="text-eyebrow border-b border-warm-border pb-2 mb-1">
               Quick Links
             </h4>
             <ul className="space-y-3">
@@ -50,7 +50,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                   <Link
                     to={link.to}
                     onClick={(e) => handleLinkClick(link.sectionId, e)}
-                    className="text-xs font-semibold text-stone-600 hover:text-[#ea580c] transition-colors"
+                    className="cursor-pointer text-sm font-medium text-stone-700 hover:text-[#ea580c] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -60,18 +60,18 @@ export default function Footer({ onNavigate }: FooterProps) {
           </div>
 
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-extrabold text-xs tracking-wider uppercase text-stone-900 border-b border-stone-200 pb-2">
+            <h4 className="text-eyebrow border-b border-warm-border pb-2 mb-1">
               Address & Hours
             </h4>
             <div className="space-y-4">
-              <div className="flex gap-2.5 items-start text-xs text-stone-600">
+              <div className="flex gap-2.5 items-start text-sm text-stone-700">
                 <MapPin className="w-4 h-4 text-[#ea580c] flex-shrink-0 mt-0.5" />
                 <p className="leading-relaxed">
                   <strong>Curry Express</strong><br />
                   15190 Walden Rd, Montgomery, TX 77356
                 </p>
               </div>
-              <div className="flex gap-2.5 items-start text-xs text-stone-600">
+              <div className="flex gap-2.5 items-start text-sm text-stone-700">
                 <Clock className="w-4 h-4 text-[#ea580c] flex-shrink-0 mt-0.5" />
                 <div className="leading-relaxed">
                   <span className="font-bold block text-stone-750">Hours</span>
@@ -82,7 +82,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           </div>
 
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-extrabold text-xs tracking-wider uppercase text-stone-900 border-b border-stone-200 pb-2">
+            <h4 className="text-eyebrow border-b border-warm-border pb-2 mb-1">
               Follow & Contact
             </h4>
             <div className="flex gap-3">
@@ -90,7 +90,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-stone-250/20 text-stone-600 hover:bg-[#ea580c] hover:text-white flex items-center justify-center transition-colors shadow-sm"
+                className="cursor-pointer w-9 h-9 rounded-full bg-stone-250/20 text-stone-600 hover:bg-[#ea580c] hover:text-white flex items-center justify-center transition-colors shadow-sm"
                 aria-label="Follow us on Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -99,33 +99,33 @@ export default function Footer({ onNavigate }: FooterProps) {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer"
-                className="w-9 h-9 rounded-full bg-stone-250/20 text-stone-600 hover:bg-[#037AFA] hover:text-white flex items-center justify-center transition-colors shadow-sm"
+                className="cursor-pointer w-9 h-9 rounded-full bg-stone-250/20 text-stone-600 hover:bg-[#037AFA] hover:text-white flex items-center justify-center transition-colors shadow-sm"
                 aria-label="Follow us on Facebook"
               >
                 <Facebook className="w-4 h-4" />
               </a>
             </div>
             <div className="pt-3 space-y-3">
-              <div className="flex items-center gap-2.5 text-xs text-stone-600">
+              <a href="tel:+13468631124" className="flex items-center gap-2.5 text-sm text-stone-700 hover:text-[#ea580c] transition-colors">
                 <Phone className="w-4 h-4 text-[#ea580c] flex-shrink-0" />
                 <span className="font-bold">+1 (346) 863-1124</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-stone-600">
+              </a>
+              <a href="mailto:info@curryexpresstexas.com" className="flex items-center gap-2.5 text-sm text-stone-700 hover:text-[#ea580c] transition-colors">
                 <Mail className="w-4 h-4 text-[#ea580c] flex-shrink-0" />
-                <span className="font-bold uppercase text-[10px] sm:text-xs">info@curryexpresstexas.com</span>
-              </div>
+                <span className="font-medium">info@curryexpresstexas.com</span>
+              </a>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-stone-200/80 pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs text-stone-500">
+        <div className="border-t border-stone-200/80 pt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-stone-600">
           <p className="font-medium">
             © Copyright {currentYear} Curry Express. All Rights Reserved.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="hover:underline">Privacy Policy</a>
+            <a href="#" className="cursor-pointer hover:underline">Privacy Policy</a>
             <span className="text-stone-300">|</span>
-            <a href="#" className="hover:underline">Terms of Service</a>
+            <a href="#" className="cursor-pointer hover:underline">Terms of Service</a>
           </div>
         </div>
       </div>

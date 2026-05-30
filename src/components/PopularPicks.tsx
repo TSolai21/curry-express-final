@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 
 import alooTikkaBurgerImage from '../assets/images/aloo_tikka_burger_1780049412009.png';
 import { childFadeInUp, fadeInUp, staggerContainer, viewport } from '../utils/motion';
+import FillHoverButton from './FillHoverButton';
 
 export default function PopularPicks() {
   const swiperRef = useRef<any>(null);
@@ -86,7 +87,7 @@ export default function PopularPicks() {
             <span className="text-xs font-bold tracking-wide text-[#d12a2a] block uppercase mb-3">
               Customer favorites
             </span>
-            <h2 className="text-3xl md:text-4xl font-black text-[#1a1a1a] tracking-tight font-sans max-w-xl leading-[1.15]">
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight max-w-xl leading-snug">
               Popular picks
             </h2>
           </motion.div>
@@ -95,17 +96,19 @@ export default function PopularPicks() {
             <motion.button
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="swiper-button-prev-custom w-14 h-14 rounded-full border border-stone-200 bg-[#fdfbf7] flex items-center justify-center text-[#ea580c] hover:bg-stone-50 transition-all cursor-pointer shadow-sm z-20"
+              className="swiper-button-prev-custom w-14 h-14 rounded-full border border-warm-border bg-warm-white flex items-center justify-center text-[#ea580c] hover:bg-warm-surface transition-all cursor-pointer shadow-sm z-20"
             >
               <ArrowLeft className="w-6 h-6 stroke-[1.5]" />
             </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-              className="swiper-button-next-custom w-14 h-14 rounded-full bg-[#ea580c] hover:bg-[#c2410c] flex items-center justify-center text-white transition-all shadow-md cursor-pointer z-20"
-            >
-              <ArrowRight className="w-6 h-6 stroke-[1.5]" />
-            </motion.button>
+            <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }} className="z-20">
+              <FillHoverButton
+                type="button"
+                className="swiper-button-next-custom h-14 w-14 rounded-full p-0 shadow-md"
+                aria-label="Next slide"
+              >
+                <ArrowRight className="w-6 h-6 stroke-[1.5]" />
+              </FillHoverButton>
+            </motion.div>
           </motion.div>
         </motion.div>
 
@@ -148,7 +151,7 @@ export default function PopularPicks() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ delay: (i % 3) * 0.15, duration: 0.5 }}
-                    className={`group rounded-xl p-8 flex flex-col items-center text-center shadow-md relative border transition-all duration-500 delay-150 overflow-hidden h-full ${isActive ? 'bg-[#ea580c] border-[#ea580c] shadow-[0_20px_50px_rgba(234,88,12,0.22)]' : 'bg-[#FAF8F5] border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c]'}`}
+                    className={`group rounded-xl p-8 flex flex-col items-center text-center shadow-md relative border transition-all duration-500 delay-150 overflow-hidden h-full ${isActive ? 'bg-[#ea580c] border-[#ea580c] shadow-[0_20px_50px_rgba(234,88,12,0.22)]' : 'bg-warm-cream border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c]'}`}
                   >
                     {/* Food Texture Background */}
                     <div className={`absolute inset-[-50px] z-0 ${isActive ? 'opacity-15' : 'opacity-[0.02]'} transition-all duration-[3000ms] delay-150 ease-out pointer-events-none transform translate-x-0 translate-y-0 scale-100 ${isActive ? '' : 'group-hover:-translate-x-3 group-hover:-translate-y-2 group-hover:scale-105'} bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1wPSc1JyBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyMCkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDE4IDAiIC8+CiAgICA8cGF0aCBkPSJNeCAxMmgxOCIgLz4KICAgIDxwYXRoIGQ9Ik00IDE2YTIgMiAwIDAgMCAyIDJoMTJhMiAwIDAgMCAyLTIiIC8+CiAgICA8cGF0aCBkPSJNNCAxNmgxNiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLCA1MCkgcm90YXRlKDQ1KSBzY2FsZSgyKSI+CiAgICA8cGF0aCBkPSJNMTUgMkwzIDIyaDI0WiIgLz4KICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTIiIHI9IjEiIC8+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE2IiByPSIxIiAvPgogICAgPGNpcmNsZSBjeD0iMTgiIGN5PSIxMiIgcj0iMSIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDEyMCkgcm90YXRlKC0xNSkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTYgOGgxMmwtMS41IDEySDcuNVoiIC8+CiAgICA8cGF0aCBkPSJNNCA4aDE2IiAvPgogICAgPHBhdGggZD0iTTEyIDJ2NiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwLCAxNDApIHJvdGF0ZSgxNSkgc2NhbGUoMikiPgogICAgPHJlY3QgeD0iMiIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIHJ4PSI0IiAvPgogICAgPHBhdGggZD0iTTQgMTJoMTYiIC8+CiAgPC9nPgo8L3N2Zz4=')]`} />
@@ -171,7 +174,7 @@ export default function PopularPicks() {
                     </svg>
 
                     {/* Image */}
-                    <div className={`relative flex-shrink-0 w-60 h-60 mt-10 mb-8 rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 delay-150 z-10 bg-[#FAF8F5] ${isActive ? 'shadow-[0_20px_40px_rgba(0,0,0,0.25)]' : 'group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)]'}`}>
+                    <div className={`relative flex-shrink-0 w-60 h-60 mt-10 mb-8 rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 delay-150 z-10 bg-warm-cream ${isActive ? 'shadow-[0_20px_40px_rgba(0,0,0,0.25)]' : 'group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)]'}`}>
                       <img
                         src={pick.image}
                         alt={pick.name}
@@ -181,7 +184,7 @@ export default function PopularPicks() {
                     </div>
 
                     {/* Divider */}
-                    <div className={`w-16 h-[3px] mb-8 transition-colors duration-500 delay-150 z-10 ${isActive ? 'bg-[#FAF8F5]' : 'bg-[#e03131] group-hover:bg-[#FAF8F5]'}`} />
+                    <div className={`w-16 h-[3px] mb-8 transition-colors duration-500 delay-150 z-10 ${isActive ? 'bg-warm-cream' : 'bg-[#e03131] group-hover:bg-warm-cream'}`} />
 
                     {/* Title Container */}
                     <div className="mt-auto pb-4 relative w-full h-[70px] flex items-center justify-center z-10">

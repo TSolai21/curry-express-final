@@ -31,7 +31,7 @@ export default function AboutPage() {
     <main className="flex-1">
       <PageBanner title="About Us" breadcrumbLabel="About" />
 
-      <section className="py-12 md:py-16 bg-[#FDFBF7]">
+      <section className="py-12 md:py-16 bg-warm-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <motion.div
@@ -42,7 +42,7 @@ export default function AboutPage() {
               variants={fadeInLeft}
             >
               <div className="absolute inset-4 -right-1.5 -bottom-1.5 bg-[#ea580c]/15 rounded-3xl -z-10" />
-              <div className="w-full h-[380px] sm:h-[480px] rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+              <div className="w-full h-[380px] sm:h-[480px] rounded-2xl overflow-hidden shadow-xl border-4 border-warm-cream">
                 <img
                   src="/chef.jpg"
                   alt="Chef in the kitchen"
@@ -60,21 +60,19 @@ export default function AboutPage() {
               variants={staggerContainer}
             >
               <motion.div variants={childFadeInUp}>
-                <span className="text-xs font-bold tracking-[0.25em] text-[#ea580c] block uppercase mb-2">
-                  Curry Express
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight leading-[1.15] font-sans">
+                <span className="text-eyebrow block mb-2">Curry Express</span>
+                <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight leading-snug">
                   Good food, close to home
                 </h2>
               </motion.div>
 
-              <motion.p variants={childFadeInUp} className="text-sm text-stone-600 leading-relaxed">
+              <motion.p variants={childFadeInUp} className="text-base text-stone-700 leading-relaxed">
                 We opened Curry Express to give Montgomery a straightforward place for Indian and
                 Indo-Chinese food — butter chicken, biryani, samosas, hakka noodles, and our aloo tikka
                 burger when you want something different.
               </motion.p>
 
-              <motion.p variants={childFadeInUp} className="text-sm text-stone-600 leading-relaxed">
+              <motion.p variants={childFadeInUp} className="text-base text-stone-700 leading-relaxed">
                 Most nights you will find families picking up dinner, neighbors grabbing lunch, and regulars
                 who already know their order. That is exactly how we like it.
               </motion.p>
@@ -83,7 +81,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-stone-50">
+      <section className="py-12 md:py-16 bg-warm-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-10"
@@ -92,16 +90,16 @@ export default function AboutPage() {
             viewport={viewport}
             variants={staggerContainer}
           >
-            <motion.span variants={childFadeInUp} className="text-xs font-bold tracking-[0.25em] text-[#ea580c] block uppercase mb-2">
+            <motion.span variants={childFadeInUp} className="text-eyebrow block mb-2">
               How We Cook
             </motion.span>
-            <motion.h2 variants={childFadeInUp} className="text-2xl md:text-3xl font-black text-stone-900 tracking-tight">
+            <motion.h2 variants={childFadeInUp} className="text-2xl md:text-3xl font-bold text-stone-900 tracking-tight">
               Simple food, done right
             </motion.h2>
           </motion.div>
 
           <motion.div
-            className="max-w-3xl mx-auto space-y-5 text-sm text-stone-600 leading-relaxed text-center"
+            className="max-w-3xl mx-auto space-y-5 text-base text-stone-700 leading-relaxed text-center"
             initial="hidden"
             whileInView="visible"
             viewport={viewport}
@@ -119,7 +117,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-[#FDFBF7]">
+      <section className="py-12 md:py-16 bg-warm-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
@@ -133,11 +131,11 @@ export default function AboutPage() {
                 key={item.title}
                 variants={childFadeInUp}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className="text-center space-y-4 p-6 rounded-2xl bg-white border border-stone-100 shadow-sm"
+                className="text-center space-y-4 p-6 rounded-2xl bg-warm-elevated border border-warm-border shadow-sm"
               >
                 <div className="flex justify-center">{item.icon}</div>
                 <h3 className="font-bold text-stone-900 text-sm">{item.title}</h3>
-                <p className="text-xs text-stone-500 leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-stone-600 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </motion.div>

@@ -3,6 +3,7 @@ import { Tag, Sparkles, Check, Flame } from 'lucide-react';
 import { motion } from 'motion/react';
 import thaliComboImage from '../assets/images/thali_combo_1780049451886.png';
 import { openDoorDash } from '../constants';
+import FillHoverButton from './FillHoverButton';
 
 export default function CurryExpressCombos() {
   const [selectedComboId, setSelectedComboId] = useState('combo-butter-chicken');
@@ -51,10 +52,10 @@ export default function CurryExpressCombos() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7 space-y-8 text-left">
             <div>
-              <span className="text-xs font-bold tracking-[0.25em] text-[#ea580c] block mb-2 uppercase">
+              <span className="text-eyebrow block mb-2">
                 Combo Meals
               </span>
-              <h2 className="text-3xl sm:text-4xl font-black tracking-tight leading-none text-stone-100">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-snug text-stone-100">
                 Feed the <span className="text-amber-400">whole table</span>
               </h2>
             </div>
@@ -73,7 +74,7 @@ export default function CurryExpressCombos() {
                     }`}
                   >
                     {isSelected && (
-                      <div className="absolute -top-3 right-4 bg-[#ea580c] text-white font-mono text-[9px] px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
+                      <div className="absolute -top-3 right-4 bg-[#ea580c] text-white text-[9px] px-2.5 py-0.5 rounded-full font-bold flex items-center gap-1">
                         <Check className="w-2.5 h-2.5" /> BEST VALUE
                       </div>
                     )}
@@ -85,7 +86,7 @@ export default function CurryExpressCombos() {
                       <span className="text-xl font-black text-[#ea580c]">${combo.price}</span>
                     </div>
 
-                    <p className="text-xs text-stone-400 leading-relaxed font-sans mt-1">
+                    <p className="text-sm text-stone-300 leading-relaxed mt-1">
                       {combo.subtitle}
                     </p>
                   </div>
@@ -94,13 +95,14 @@ export default function CurryExpressCombos() {
             </div>
 
             <div className="pt-2">
-              <button
+              <FillHoverButton
+                variant="outline"
                 onClick={openDoorDash}
-                className="bg-[#d97706] hover:bg-[#b45309] text-white px-10 py-4 rounded-sm font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-xl flex items-center gap-2 cursor-pointer active:scale-95"
+                className="px-10 py-4 rounded-sm text-xs tracking-wider uppercase shadow-xl active:scale-95 transition-transform"
                 id="combo-order-now-btn"
               >
                 ORDER NOW
-              </button>
+              </FillHoverButton>
             </div>
           </div>
 
@@ -118,13 +120,13 @@ export default function CurryExpressCombos() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/10 to-transparent" />
 
-                <span className="absolute top-4 left-4 bg-amber-500 text-stone-950 font-bold font-mono text-[9px] px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
+                <span className="absolute top-4 left-4 bg-amber-500 text-stone-950 font-bold text-[9px] px-3 py-1 rounded-full flex items-center gap-1 shadow-md">
                   <Tag className="w-3 h-3" /> BEST DEAL
                 </span>
               </div>
 
               <div className="p-8 text-center space-y-4">
-                <div className="inline-flex items-center gap-1 text-amber-400 font-mono text-[10px] font-bold tracking-widest uppercase">
+                <div className="inline-flex items-center gap-1 text-amber-400 text-xs font-bold tracking-widest uppercase">
                   <Sparkles className="w-3.5 h-3.5" />
                   Made fresh
                 </div>
@@ -133,11 +135,11 @@ export default function CurryExpressCombos() {
                   Dinner for two
                 </h4>
 
-                <p className="text-xs text-stone-400 leading-relaxed">
+                <p className="text-sm text-stone-300 leading-relaxed">
                   Curry, rice, bread, and a sweet to finish. Easy takeout for a weeknight.
                 </p>
 
-                <div className="border-t border-stone-800 pt-4 flex justify-center gap-4 text-[10px] font-mono text-stone-400 font-semibold tracking-wider">
+                <div className="border-t border-stone-800 pt-4 flex justify-center gap-4 text-xs text-stone-400 font-semibold tracking-wider">
                   <span className="flex items-center gap-1">
                     <Flame className="w-3.5 h-3.5 text-orange-400" /> Hot from the kitchen
                   </span>

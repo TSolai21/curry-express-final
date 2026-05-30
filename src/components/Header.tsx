@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { ShoppingBag, Menu, X, Phone, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { openDoorDash } from '../constants';
+import FillHoverButton from './FillHoverButton';
 
 interface HeaderProps {
   activeSection: string;
@@ -49,7 +50,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled || mobileMenuOpen || !isHome
-            ? 'bg-[#FDFBF7]/95 backdrop-blur-md shadow-md py-3'
+            ? 'bg-warm-white/95 backdrop-blur-md shadow-md py-3'
             : 'bg-transparent py-5'
         }`}
         id="app-header"
@@ -70,7 +71,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                 <button
                   key={link.id}
                   onClick={() => handleLinkClick(link.id)}
-                  className={`text-sm font-bold tracking-widest hover:text-[#ea580c] transition-colors focus:outline-none cursor-pointer ${navTextClass(link.id)}`}
+                  className={`text-sm font-semibold tracking-wide hover:text-[#ea580c] transition-colors focus:outline-none cursor-pointer ${navTextClass(link.id)}`}
                 >
                   {link.name}
                 </button>
@@ -79,14 +80,15 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
 
             {/* Call to Actions */}
             <div className="flex items-center space-x-4">
-              <button
+              <FillHoverButton
+                variant={isScrolled || mobileMenuOpen || !isHome ? 'solid' : 'outline'}
                 onClick={openDoorDash}
-                className="relative bg-[#ea580c] hover:bg-[#c2410c] text-white px-5 py-2.5 rounded-sm font-bold text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 shadow-lg focus:outline-none cursor-pointer active:scale-95"
+                className="px-5 py-2.5 rounded-sm text-xs tracking-wider uppercase shadow-lg active:scale-95 transition-transform"
                 id="header-order-online-btn"
               >
                 <ShoppingBag className="w-4 h-4" />
                 <span className="hidden sm:inline">Order Online</span>
-              </button>
+              </FillHoverButton>
 
               {/* Mobile Menu Button */}
               <button
@@ -109,7 +111,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[60px] bg-[#FDFBF7] z-30 md:hidden flex flex-col p-6 shadow-xl border-t border-stone-200/50"
+            className="fixed inset-0 top-[60px] bg-warm-white z-30 md:hidden flex flex-col p-6 shadow-xl border-t border-warm-border/80"
             id="mobile-nav-panel"
           >
             <div className="flex flex-col space-y-6 mt-4">
@@ -117,8 +119,8 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                 <button
                   key={link.id}
                   onClick={() => handleLinkClick(link.id)}
-                  className={`text-left text-lg font-bold tracking-wider py-2 border-b border-stone-100 ${
-                    isLinkActive(link.id) ? 'text-[#ea580c]' : 'text-stone-850'
+                  className={`text-left text-lg font-bold tracking-wider py-2 border-b border-stone-100 cursor-pointer ${
+                    isLinkActive(link.id) ? 'text-[#ea580c]' : 'text-stone-800'
                   }`}
                 >
                   {link.name}

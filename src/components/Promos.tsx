@@ -32,7 +32,7 @@ export default function Promos({ onSelectItem }: PromosProps) {
   };
 
   return (
-    <section className="py-6 bg-[#FDFBF7]" id="promotions">
+    <section className="py-6 bg-warm-white" id="promotions">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
@@ -49,7 +49,7 @@ export default function Promos({ onSelectItem }: PromosProps) {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(16,185,129,0.15),_transparent_45%)]" />
             
             <div className="space-y-4 max-w-sm text-left relative z-10 flex-1">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 font-mono text-[10px] font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5" />
                 RICH, CREAMY, AND PACKED WITH FLAVOR
               </div>
@@ -88,7 +88,7 @@ export default function Promos({ onSelectItem }: PromosProps) {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,_rgba(234,88,12,0.15),_transparent_45%)]" />
 
             <div className="space-y-4 max-w-sm text-left relative z-10 flex-1">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-400/10 border border-orange-500/20 text-orange-300 font-mono text-[10px] font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-400/10 border border-orange-500/20 text-orange-300 text-xs font-bold uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5" />
                 RICH & CREAMY CHEF SPECIAL
               </div>

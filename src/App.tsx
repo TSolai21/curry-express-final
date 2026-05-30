@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from
 import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
 import CategoryMenuPage from './pages/CategoryMenuPage';
+import FullMenuPage from './pages/FullMenuPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
@@ -105,7 +106,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#FDFBF7] text-stone-850 flex flex-col font-sans selection:bg-[#ea580c]/10 selection:text-[#ea580c]">
+    <div className="min-h-screen overflow-x-hidden bg-warm-white text-stone-700 flex flex-col font-sans selection:bg-[#ea580c]/10 selection:text-[#ea580c]">
       {/* Absolute top spacer representing header layout alignment */}
       <Header
         activeSection={activeSection}
@@ -114,6 +115,7 @@ function AppContent() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<FullMenuPage />} />
         <Route path="/category/:categoryId" element={<CategoryMenuPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />

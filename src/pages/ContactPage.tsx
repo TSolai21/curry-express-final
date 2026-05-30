@@ -1,215 +1,167 @@
-import { useState, FormEvent } from 'react';
-import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { MapPin, Phone, Mail, Clock, Navigation } from 'lucide-react';
+import { motion } from 'motion/react';
 import PageBanner from '../components/PageBanner';
-import { childFadeInUp, fadeInLeft, fadeInRight, staggerContainer, viewport } from '../utils/motion';
+import FillHoverButton from '../components/FillHoverButton';
+import { childFadeInUp, fadeInUp, staggerContainer, viewport } from '../utils/motion';
+
+const ADDRESS = '15190 Walden Rd, Montgomery, TX 77356';
+const PHONE = '+1 (346) 863-1124';
+const PHONE_HREF = 'tel:+13468631124';
+const EMAIL = 'info@curryexpresstexas.com';
+const MAP_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(ADDRESS)}&z=16&ie=UTF8&iwloc=&output=embed`;
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ADDRESS)}`;
+
+const contactCards = [
+  {
+    icon: MapPin,
+    title: 'Visit Us',
+    lines: ['15190 Walden Rd', 'Montgomery, TX 77356'],
+    href: DIRECTIONS_URL,
+    linkLabel: 'Get directions',
+  },
+  {
+    icon: Phone,
+    title: 'Call Us',
+    lines: [PHONE],
+    href: PHONE_HREF,
+    linkLabel: 'Call now',
+  },
+  {
+    icon: Mail,
+    title: 'Email Us',
+    lines: [EMAIL],
+    href: `mailto:${EMAIL}`,
+    linkLabel: 'Send email',
+  },
+  {
+    icon: Clock,
+    title: 'Hours',
+    lines: ['Open daily', '11:00 AM – 9:30 PM'],
+    href: undefined,
+    linkLabel: undefined,
+  },
+];
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  const contactInfo = [
-    {
-      icon: <MapPin className="w-5 h-5 text-[#ea580c]" />,
-      title: 'Visit Us',
-      lines: ['15190 Walden Rd', 'Montgomery, TX 77356'],
-    },
-    {
-      icon: <Phone className="w-5 h-5 text-[#ea580c]" />,
-      title: 'Call Us',
-      lines: ['+1 (346) 863-1124'],
-    },
-    {
-      icon: <Mail className="w-5 h-5 text-[#ea580c]" />,
-      title: 'Email Us',
-      lines: ['info@curryexpresstexas.com'],
-    },
-    {
-      icon: <Clock className="w-5 h-5 text-[#ea580c]" />,
-      title: 'Hours',
-      lines: ['Open Daily', '11:00 AM – 9:30 PM'],
-    },
-  ];
-
   return (
     <main className="flex-1">
       <PageBanner title="Contact" breadcrumbLabel="Contact" />
 
-      <section className="py-12 md:py-16 bg-[#FDFBF7]">
+      <section className="py-12 md:py-20 bg-warm-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+          <motion.div
+            className="text-center max-w-2xl mx-auto mb-10 md:mb-14"
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            variants={staggerContainer}
+          >
+            <motion.span variants={childFadeInUp} className="text-eyebrow block mb-3">
+              Find Us
+            </motion.span>
+            <motion.h2
+              variants={childFadeInUp}
+              className="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight mb-4"
+            >
+              Come see us on Walden Road
+            </motion.h2>
+            <motion.p variants={childFadeInUp} className="text-base text-stone-700 leading-relaxed">
+              Dine in, pick up, or plan your route — we are in Montgomery, easy to reach from Lake Conroe
+              and the surrounding area.
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
             <motion.div
-              className="lg:col-span-5 space-y-6"
+              className="lg:col-span-4 flex flex-col gap-4"
               initial="hidden"
               whileInView="visible"
               viewport={viewport}
-              variants={fadeInLeft}
+              variants={staggerContainer}
             >
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewport}
-                className="space-y-6"
-              >
-                <motion.div variants={childFadeInUp}>
-                  <span className="text-xs font-bold tracking-[0.25em] text-[#ea580c] block uppercase mb-2">
-                    Say Hello
-                  </span>
-                  <h2 className="text-2xl md:text-3xl font-black text-stone-900 tracking-tight leading-tight">
-                    Questions? Just ask.
-                  </h2>
-                </motion.div>
-
-                <motion.p variants={childFadeInUp} className="text-sm text-stone-600 leading-relaxed">
-                  Call us for takeout, ask about catering, or send a note below. We usually reply the same day.
-                </motion.p>
-              </motion.div>
-
-              <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4"
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewport}
-              >
-                {contactInfo.map((item) => (
+              {contactCards.map((item) => {
+                const Icon = item.icon;
+                return (
                   <motion.div
                     key={item.title}
                     variants={childFadeInUp}
-                    whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                    className="flex gap-4 p-5 rounded-2xl bg-white border border-stone-100 shadow-sm"
+                    whileHover={{ y: -2, transition: { duration: 0.2 } }}
+                    className="flex flex-col gap-3 p-5 sm:p-6 rounded-2xl bg-warm-elevated border border-orange-100/80 shadow-[0_3px_12px_rgba(0,0,0,0.04)]"
                   >
-                    <div className="shrink-0 w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center">
-                      {item.icon}
+                    <div className="flex gap-4">
+                      <div className="shrink-0 w-11 h-11 rounded-full bg-orange-50 flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-[#ea580c]" aria-hidden />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="font-semibold text-stone-900 text-base mb-1">{item.title}</h3>
+                        {item.lines.map((line) => (
+                          <p key={line} className="text-base text-stone-700 leading-relaxed">
+                            {line}
+                          </p>
+                        ))}
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-stone-900 text-sm mb-1">{item.title}</h3>
-                      {item.lines.map((line) => (
-                        <p key={line} className="text-xs text-stone-500 leading-relaxed">
-                          {line}
-                        </p>
-                      ))}
-                    </div>
+                    {item.href && item.linkLabel && (
+                      <a
+                        href={item.href}
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="cursor-pointer text-xs font-bold uppercase tracking-wider text-[#ea580c] hover:text-[#c2410c] transition-colors pl-[3.75rem]"
+                      >
+                        {item.linkLabel} →
+                      </a>
+                    )}
                   </motion.div>
-                ))}
+                );
+              })}
+
+              <motion.div variants={childFadeInUp} className="pt-2 flex flex-col sm:flex-row lg:flex-col gap-3">
+                <FillHoverButton
+                  onClick={() => window.open(DIRECTIONS_URL, '_blank', 'noopener,noreferrer')}
+                  className="w-full justify-center px-6 py-3.5 rounded-sm text-xs tracking-widest uppercase"
+                >
+                  <Navigation className="w-4 h-4" />
+                  Get Directions
+                </FillHoverButton>
+                <FillHoverButton
+                  onClick={() => {
+                    window.location.href = PHONE_HREF;
+                  }}
+                  className="w-full justify-center px-6 py-3.5 rounded-sm text-xs tracking-widest uppercase"
+                >
+                  <Phone className="w-4 h-4" />
+                  Call Us
+                </FillHoverButton>
               </motion.div>
             </motion.div>
 
             <motion.div
-              className="lg:col-span-7"
+              className="lg:col-span-8 min-h-[320px] sm:min-h-[420px] lg:min-h-[560px]"
               initial="hidden"
               whileInView="visible"
               viewport={viewport}
-              variants={fadeInRight}
+              variants={fadeInUp}
             >
-              <div className="bg-white rounded-2xl border border-stone-100 shadow-lg p-6 sm:p-8">
-                <h3 className="font-bold text-stone-900 text-lg mb-6">Send a message</h3>
-
-                <AnimatePresence mode="wait">
-                  {submitted ? (
-                    <motion.div
-                      key="success"
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.4 }}
-                      className="py-12 text-center space-y-3"
-                    >
-                      <p className="text-[#ea580c] font-bold text-lg">Thank you!</p>
-                      <p className="text-sm text-stone-500">
-                        Got it — we will get back to you soon.
-                      </p>
-                    </motion.div>
-                  ) : (
-                    <motion.form
-                      key="form"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      onSubmit={handleSubmit}
-                      className="space-y-5"
-                    >
-                      <motion.div
-                        className="grid grid-cols-1 sm:grid-cols-2 gap-5"
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="visible"
-                      >
-                        <motion.div variants={childFadeInUp}>
-                          <label htmlFor="name" className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">
-                            Name
-                          </label>
-                          <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            required
-                            className="w-full px-4 py-3 rounded-lg border border-stone-200 text-sm focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c]/30 transition-colors"
-                            placeholder="Your name"
-                          />
-                        </motion.div>
-                        <motion.div variants={childFadeInUp}>
-                          <label htmlFor="email" className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">
-                            Email
-                          </label>
-                          <input
-                            id="email"
-                            name="email"
-                            type="email"
-                            required
-                            className="w-full px-4 py-3 rounded-lg border border-stone-200 text-sm focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c]/30 transition-colors"
-                            placeholder="you@example.com"
-                          />
-                        </motion.div>
-                      </motion.div>
-
-                      <motion.div variants={childFadeInUp} initial="hidden" animate="visible">
-                        <label htmlFor="phone" className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">
-                          Phone <span className="text-stone-400 font-normal normal-case">(optional)</span>
-                        </label>
-                        <input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          className="w-full px-4 py-3 rounded-lg border border-stone-200 text-sm focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c]/30 transition-colors"
-                          placeholder="+1 (555) 000-0000"
-                        />
-                      </motion.div>
-
-                      <motion.div variants={childFadeInUp} initial="hidden" animate="visible">
-                        <label htmlFor="message" className="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-2">
-                          Message
-                        </label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          required
-                          rows={5}
-                          className="w-full px-4 py-3 rounded-lg border border-stone-200 text-sm focus:outline-none focus:border-[#ea580c] focus:ring-1 focus:ring-[#ea580c]/30 transition-colors resize-none"
-                          placeholder="Tell us what you need"
-                        />
-                      </motion.div>
-
-                      <motion.div variants={childFadeInUp} initial="hidden" animate="visible">
-                        <motion.button
-                          type="submit"
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          className="w-full sm:w-auto bg-[#ea580c] hover:bg-[#c2410c] text-white px-8 py-3.5 rounded-sm font-bold text-xs tracking-widest uppercase transition-colors cursor-pointer shadow-md flex items-center justify-center gap-2"
-                        >
-                          <Send className="w-4 h-4" />
-                          SEND MESSAGE
-                        </motion.button>
-                      </motion.div>
-                    </motion.form>
-                  )}
-                </AnimatePresence>
+              <div className="h-full rounded-2xl overflow-hidden border border-stone-200 shadow-lg bg-stone-100 relative">
+                <iframe
+                  title="Curry Express on Google Maps"
+                  src={MAP_EMBED_URL}
+                  className="absolute inset-0 w-full h-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
+              <p className="mt-3 text-center text-sm text-stone-600">
+                <a
+                  href={DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cursor-pointer text-[#ea580c] font-semibold hover:underline"
+                >
+                  Open in Google Maps
+                </a>
+              </p>
             </motion.div>
           </div>
         </div>

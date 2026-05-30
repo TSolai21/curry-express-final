@@ -3,6 +3,7 @@ import { Truck, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { childFadeInUp, fadeInRight, staggerContainer, viewport } from '../utils/motion';
 import { openDoorDash } from '../constants';
+import FillHoverButton from './FillHoverButton';
 
 interface DeliveryBannerProps {
   overlapBottom?: boolean;
@@ -144,7 +145,7 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#FDFBF7] rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative border border-stone-200"
+              className="bg-warm-cream rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl relative border border-warm-border"
             >
               <button
                 onClick={() => setModalOpen(false)}
@@ -160,21 +161,21 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
 
                 <div className="space-y-2">
                   <h3 className="text-xl font-bold text-stone-900 tracking-tight">Order on {selectedPartner}?</h3>
-                  <p className="text-sm text-stone-500 max-w-sm mx-auto">
+                  <p className="text-base text-stone-600 max-w-sm mx-auto leading-relaxed">
                     You will be taken to {selectedPartner} to place your order. For the fastest pickup, DoorDash works great.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <button
+                  <FillHoverButton
                     onClick={() => {
                       setModalOpen(false);
                       openDoorDash();
                     }}
-                    className="bg-[#ea580c] hover:bg-[#c2410c] text-white py-3 rounded-lg font-bold text-xs tracking-wider uppercase cursor-pointer"
+                    className="w-full py-3 rounded-lg text-xs tracking-wider uppercase"
                   >
                     Use DoorDash
-                  </button>
+                  </FillHoverButton>
                   <button
                     onClick={() => {
                       setModalOpen(false);

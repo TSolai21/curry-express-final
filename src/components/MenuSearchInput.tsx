@@ -25,13 +25,13 @@ export default function MenuSearchInput({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-label={placeholder}
-        className="w-full pl-12 pr-10 py-3 rounded-full border border-orange-100 bg-white text-stone-800 placeholder:text-stone-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ea580c]/30 focus:border-[#ea580c] transition-all"
+        className="w-full pl-12 pr-10 py-3 rounded-full border border-orange-100/80 bg-warm-elevated text-stone-800 placeholder:text-stone-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ea580c]/30 focus:border-[#ea580c] transition-all"
       />
       {value && (
         <button
           type="button"
           onClick={() => onChange('')}
-          className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center text-stone-400 hover:text-stone-600 hover:bg-stone-100 transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex cursor-pointer items-center justify-center text-stone-400 hover:text-stone-600 hover:bg-stone-100 transition-colors"
           aria-label="Clear search"
         >
           <X className="w-4 h-4" />
