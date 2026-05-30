@@ -102,6 +102,24 @@ export default function Hero({ onViewMenu, onViewOffers, onViewReviews }: HeroPr
         </motion.div>
       </div>
 
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 cursor-pointer"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        onClick={onViewMenu}
+      >
+        <span className="text-[10px] font-bold text-white/50 tracking-[0.2em] uppercase">Scroll</span>
+        <div className="w-5 h-8 rounded-full border-2 border-white/20 flex justify-center p-1">
+          <motion.div
+            className="w-1 h-1.5 bg-[#ea580c] rounded-full"
+            animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </div>
+      </motion.div>
+
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-8 bg-warm-white rounded-t-[100%] pointer-events-none z-10"
         initial={{ opacity: 0, y: 20 }}
