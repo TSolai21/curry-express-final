@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { Link, type LinkProps } from 'react-router-dom';
 
-type FillHoverButtonVariant = 'solid' | 'outline';
+type FillHoverButtonVariant = 'solid' | 'outline' | 'primary';
 
 type FillHoverButtonBaseProps = {
   className?: string;
@@ -27,12 +27,14 @@ const sharedStyles =
 const variantStyles: Record<FillHoverButtonVariant, string> = {
   solid: 'bg-[#222222] text-white',
   outline: 'bg-transparent border-2 border-[#ea580c] text-white',
+  primary: 'bg-[#ea580c] text-white',
 };
 
-function FillHoverOverlay() {
+function FillHoverOverlay({ variant }: { variant: FillHoverButtonVariant }) {
+  const overlayBg = variant === 'primary' ? 'bg-[#222222]' : 'bg-[#ea580c]';
   return (
     <span
-      className="absolute inset-0 bg-[#ea580c] pointer-events-none transition-none group-hover:transition-[clip-path] group-hover:duration-500 ease-out group-hover:[--btn-hover-size:150%]"
+      className={`absolute inset-0 ${overlayBg} pointer-events-none transition-none group-hover:transition-[clip-path] group-hover:duration-500 ease-out group-hover:[--btn-hover-size:150%]`}
       style={{
         clipPath:
           'circle(var(--btn-hover-size, 0) at var(--btn-hover-x, 50%) var(--btn-hover-y, 50%))',
@@ -43,7 +45,7 @@ function FillHoverOverlay() {
 }
 
 const FillHoverButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, FillHoverButtonProps>(
-  function FillHoverButton({ className = '', children, variant = 'solid', ...props }, ref) {
+  function FillHoverButton({ className = '', children, variant = 'solid' as FillHoverButtonVariant, ...props }, ref) {
     const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
       const rect = event.currentTarget.getBoundingClientRect();
       event.currentTarget.style.setProperty('--btn-hover-x', `${event.clientX - rect.left}px`);
@@ -62,7 +64,7 @@ const FillHoverButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, FillHo
           onPointerMove={handlePointerMove}
           {...linkProps}
         >
-          <FillHoverOverlay />
+          <FillHoverOverlay variant={variant} />
           <span className="relative z-10 inline-flex items-center justify-center gap-2">{children}</span>
         </Link>
       );
@@ -77,7 +79,7 @@ const FillHoverButton = forwardRef<HTMLButtonElement | HTMLAnchorElement, FillHo
         onPointerMove={handlePointerMove}
         {...buttonProps}
       >
-        <FillHoverOverlay />
+        <FillHoverOverlay variant={variant} />
         <span className="relative z-10 inline-flex items-center justify-center gap-2">{children}</span>
       </button>
     );
