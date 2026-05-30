@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <defs>
+    <pattern id="foodPattern" width="240" height="240" patternUnits="userSpaceOnUse">
+      <!-- Curry bowl -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.35">
+        <ellipse cx="36" cy="52" rx="18" ry="6"/>
+        <path d="M18 52 Q18 68 36 72 Q54 68 54 52"/>
+        <path d="M30 58 Q36 62 42 58" stroke-width="1"/>
+      </g>
+      <!-- Chili pepper -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3">
+        <path d="M108 28 Q118 40 112 58 Q106 72 100 58 Q94 42 108 28"/>
+        <path d="M108 28 Q112 22 116 26"/>
+      </g>
+      <!-- Naan / flatbread -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.32">
+        <ellipse cx="188" cy="44" rx="22" ry="14" transform="rotate(-15 188 44)"/>
+        <path d="M172 40 Q188 48 204 38" stroke-width="1"/>
+        <path d="M176 48 Q188 54 200 46" stroke-width="1"/>
+      </g>
+      <!-- Fork -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.28">
+        <path d="M52 108 L52 138"/>
+        <path d="M46 108 L46 122 M49 108 L49 122 M52 108 L52 122 M55 108 L55 122 M58 108 L58 122"/>
+      </g>
+      <!-- Spoon -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.28">
+        <ellipse cx="132" cy="112" rx="8" ry="10"/>
+        <path d="M132 122 L132 148"/>
+      </g>
+      <!-- Biryani pot -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.33">
+        <path d="M168 108 L152 138 L208 138 L192 108 Z"/>
+        <path d="M160 108 L180 108"/>
+        <path d="M176 100 Q180 92 184 100"/>
+      </g>
+      <!-- Spice star -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.2" opacity="0.3">
+        <path d="M28 168 L32 180 L44 180 L34 188 L38 200 L28 192 L18 200 L22 188 L12 180 L24 180 Z"/>
+      </g>
+      <!-- Leaf / herb -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.3" opacity="0.3">
+        <path d="M96 172 Q108 158 120 172 Q108 186 96 172"/>
+        <path d="M108 172 L108 198"/>
+      </g>
+      <!-- Burger -->
+      <g fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.32">
+        <path d="M148 178 Q168 168 188 178"/>
+        <path d="M146 186 L190 186"/>
+        <path d="M148 194 Q168 204 188 194"/>
+        <ellipse cx="168" cy="186" rx="22" ry="4"/>
+      </g>
+      <!-- Rice grain cluster -->
+      <g fill="#ffffff" opacity="0.25">
+        <ellipse cx="212" cy="178" rx="2" ry="5" transform="rotate(20 212 178)"/>
+        <ellipse cx="220" cy="186" rx="2" ry="5" transform="rotate(-10 220 186)"/>
+        <ellipse cx="204" cy="190" rx="2" ry="5" transform="rotate(35 204 190)"/>
+        <ellipse cx="216" cy="198" rx="2" ry="5" transform="rotate(5 216 198)"/>
+      </g>
+      <!-- Small dots / spice specks -->
+      <g fill="#ffffff" opacity="0.2">
+        <circle cx="72" cy="32" r="1.5"/>
+        <circle cx="156" cy="88" r="1.5"/>
+        <circle cx="64" cy="196" r="1.5"/>
+        <circle cx="200" cy="116" r="1.5"/>
+        <circle cx="120" cy="208" r="1.5"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="240" height="240" fill="url(#foodPattern)"/>
+</svg>

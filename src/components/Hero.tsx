@@ -1,0 +1,89 @@
+import { ChevronRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import burgerImage from '../assets/images/burger_hero_foreground.png';
+import { childFadeInUp, easeOut, staggerContainer } from '../utils/motion';
+
+interface HeroProps {
+  onViewMenu: () => void;
+}
+
+export default function Hero({ onViewMenu }: HeroProps) {
+  const heroContent = {
+    subtitle: 'Walden Rd · Montgomery, TX',
+    title: 'Indian & Indo-Chinese Made Fresh Daily',
+    image: burgerImage,
+  };
+
+  const accentWords = new Set(['INDIAN', 'FRESH', 'DAILY']);
+  const words = heroContent.title.split(' ');
+
+  return (
+    <div className="relative bg-stone-950 text-white min-h-[580px] lg:min-h-[680px] flex items-center overflow-hidden pt-20" id="home">
+      <motion.div
+        className="absolute inset-0 z-0"
+        initial={{ scale: 1.08, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1.2, ease: easeOut }}
+      >
+        <img src={burgerImage} alt="Authentic Indian Food Background" className="w-full h-full object-cover opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/40 to-transparent" />
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12 md:py-20">
+        <motion.div
+          className="lg:col-span-12 max-w-4xl mx-auto flex flex-col items-center gap-4 text-center"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.span
+            variants={childFadeInUp}
+            className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#ea580c] block uppercase"
+          >
+            {heroContent.subtitle}
+          </motion.span>
+
+          <motion.h1
+            variants={childFadeInUp}
+            className="text-4xl sm:text-5xl lg:text-[48px] font-extrabold tracking-tight text-white leading-[1.15] font-sans"
+          >
+            {words.map((word, i) => {
+              const isColored = accentWords.has(word.replace(/[^A-Za-z]/g, '').toUpperCase());
+              return (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 + i * 0.06, duration: 0.45, ease: easeOut }}
+                  className={isColored ? 'text-[#ea580c] inline-block mr-2' : 'inline-block mr-2'}
+                >
+                  {word}
+                </motion.span>
+              );
+            })}
+          </motion.h1>
+
+          <motion.div variants={childFadeInUp} className="pt-5 flex justify-center">
+            <motion.button
+              onClick={onViewMenu}
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="bg-[#ea580c] hover:bg-[#c2410c] text-white px-8 py-3.5 rounded-sm font-bold text-xs tracking-widest uppercase transition-colors duration-300 inline-flex items-center gap-2 group cursor-pointer shadow-lg hover:shadow-orange-900/30"
+              id="hero-view-menu-btn"
+            >
+              VIEW MENU
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-8 bg-[#FDFBF7] rounded-t-[100%] pointer-events-none z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5, ease: easeOut }}
+      />
+    </div>
+  );
+}
