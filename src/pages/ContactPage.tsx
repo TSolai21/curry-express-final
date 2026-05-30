@@ -47,7 +47,7 @@ export default function ContactPage() {
     <main className="flex-1">
       <PageBanner title="Contact" breadcrumbLabel="Contact" />
 
-      <section className="py-12 md:py-20 bg-warm-white">
+      <section className="py-10 sm:py-12 md:py-20 bg-warm-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center max-w-2xl mx-auto mb-10 md:mb-14"
@@ -61,7 +61,7 @@ export default function ContactPage() {
             </motion.span>
             <motion.h2
               variants={childFadeInUp}
-              className="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight mb-4"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-900 tracking-tight mb-4"
             >
               Come see us on Walden Road
             </motion.h2>

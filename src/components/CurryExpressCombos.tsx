@@ -44,12 +44,12 @@ export default function CurryExpressCombos() {
   const currentCombo = combos.find((c) => c.id === selectedComboId) || combos[0];
 
   return (
-    <section className="py-20 bg-stone-950 text-white relative overflow-hidden" id="combos">
+    <section className="py-12 sm:py-16 md:py-20 bg-stone-950 text-white relative overflow-hidden" id="combos">
       <div className="absolute inset-0 bg-[#161513] opacity-35 bg-[radial-gradient(#ea580c_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-stone-950 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
           <div className="lg:col-span-7 space-y-8 text-left">
             <div>
               <span className="text-eyebrow block mb-2">
@@ -98,7 +98,7 @@ export default function CurryExpressCombos() {
               <FillHoverButton
                 variant="outline"
                 onClick={openDoorDash}
-                className="px-10 py-4 rounded-sm text-xs tracking-wider uppercase shadow-xl active:scale-95 transition-transform"
+                className="w-full sm:w-auto px-8 sm:px-10 py-4 rounded-sm text-xs tracking-wider uppercase shadow-xl active:scale-95 transition-transform justify-center"
                 id="combo-order-now-btn"
               >
                 ORDER NOW
@@ -109,7 +109,7 @@ export default function CurryExpressCombos() {
           <div className="lg:col-span-5 flex justify-center">
             <motion.div
               layout
-              className="bg-stone-900 rounded-3xl overflow-hidden border border-stone-850 max-w-[380px] shadow-2xl relative"
+              className="bg-stone-900 rounded-3xl overflow-hidden border border-stone-800 w-full max-w-[380px] shadow-2xl relative"
             >
               <div className="h-56 overflow-hidden relative">
                 <img

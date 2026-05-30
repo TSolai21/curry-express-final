@@ -44,7 +44,7 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
       data-card-id={item.id}
       onClick={handleClick}
       onPointerMove={handlePointerMove}
-      className={`group h-full p-4 pt-6 pb-24 rounded-2xl text-center flex flex-col items-center shadow-[0_3px_12px_rgba(0,0,0,0.02)] border border-orange-100 transition-all duration-300 relative overflow-hidden cursor-pointer hover:shadow-md ${isActive ? 'bg-[#ea580c] shadow-md border-transparent ring-2 ring-amber-200' : 'bg-orange-50'} ${className}`}
+      className={`group h-full p-3 sm:p-4 pt-5 sm:pt-6 pb-20 sm:pb-24 rounded-2xl text-center flex flex-col items-center shadow-[0_3px_12px_rgba(0,0,0,0.02)] border border-orange-100 transition-all duration-300 relative overflow-hidden cursor-pointer hover:shadow-md ${isActive ? 'bg-[#ea580c] shadow-md border-transparent ring-2 ring-amber-200' : 'bg-orange-50'} ${className}`}
       {...motionProps}
     >
       <div
@@ -71,7 +71,7 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
         <Heart className="w-4 h-4 transition-colors group-hover/heart:text-[#ea580c] group-hover/heart:fill-[#ea580c]" />
       </motion.button>
 
-      <div className="relative z-10 mx-auto mt-2 mb-4 flex h-60 w-60 items-center justify-center sm:h-72 sm:w-72">
+      <div className="relative z-10 mx-auto mt-2 mb-3 sm:mb-4 flex h-48 w-48 items-center justify-center sm:h-60 sm:w-60 md:h-72 md:w-72">
         <span
           className="absolute inset-0 rounded-full border-2 border-white/40 pointer-events-none"
           aria-hidden
@@ -84,7 +84,7 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
           className="absolute -inset-6 rounded-full border border-orange-200/30 pointer-events-none sm:-inset-7"
           aria-hidden
         />
-        <div className="relative h-48 w-48 overflow-hidden rounded-full border-4 border-warm-cream bg-warm-cream shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-transform duration-700 ease-in-out group-hover:scale-105 sm:h-56 sm:w-56">
+        <div className="relative h-36 w-36 overflow-hidden rounded-full border-4 border-warm-cream bg-warm-cream shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-transform duration-700 ease-in-out group-hover:scale-105 sm:h-48 sm:w-48 md:h-56 md:w-56">
           <img
             src={item.image}
             alt={item.name}
@@ -133,7 +133,7 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
       </div>
 
       <div
-        className={`absolute bottom-5 left-0 right-0 px-6 z-10 transition-all duration-300 ease-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-6 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}
+        className={`absolute bottom-4 sm:bottom-5 left-0 right-0 px-4 sm:px-6 z-10 transition-all duration-300 ease-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-6 pointer-events-none max-md:opacity-0'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}
       >
         <button
           type="button"
@@ -141,7 +141,7 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
             e.stopPropagation();
             openDoorDash();
           }}
-          className="w-full h-[36px] flex items-center justify-center bg-[#222222] text-white text-sm font-bold rounded-full shadow-md hover:bg-black cursor-pointer"
+          className="w-full min-h-11 flex items-center justify-center bg-[#222222] text-white text-sm font-bold rounded-full shadow-md hover:bg-black cursor-pointer"
         >
           Buy Now
         </button>

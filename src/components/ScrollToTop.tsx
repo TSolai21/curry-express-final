@@ -45,11 +45,11 @@ export default function ScrollToTop() {
 
   return (
     <div 
-      className={`fixed bottom-8 right-8 z-[100] transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+      className={`fixed z-[100] transition-all duration-300 bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
     >
       <button 
         onClick={scrollToTop}
-        className="relative group flex cursor-pointer items-center justify-center w-[52px] h-[52px] bg-transparent rounded-full focus:outline-none transition-transform active:scale-95"
+        className="relative group flex touch-target cursor-pointer items-center justify-center w-[52px] h-[52px] bg-transparent rounded-full focus:outline-none transition-transform active:scale-95"
         aria-label="Scroll to top"
       >
         <svg className="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none" viewBox="0 0 52 52">

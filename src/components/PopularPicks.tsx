@@ -71,13 +71,13 @@ export default function PopularPicks() {
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden" id="popular-picks">
+    <section className="py-12 sm:py-16 md:py-24 relative overflow-hidden" id="popular-picks">
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header Title */}
         <motion.div
-          className="flex md:flex-row md:items-end justify-between mb-16 gap-6"
+          className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 md:mb-16 gap-4 sm:gap-6"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -92,18 +92,20 @@ export default function PopularPicks() {
             </h2>
           </motion.div>
 
-          <motion.div variants={childFadeInUp} className="flex gap-4 pb-2">
+          <motion.div variants={childFadeInUp} className="flex gap-3 sm:gap-4 pb-0 sm:pb-2 justify-center sm:justify-end">
             <motion.button
+              type="button"
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="swiper-button-prev-custom w-14 h-14 rounded-full border border-warm-border bg-warm-white flex items-center justify-center text-[#ea580c] hover:bg-warm-surface transition-all cursor-pointer shadow-sm z-20"
+              aria-label="Previous pick"
+              className="swiper-button-prev-custom touch-target w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-warm-border bg-warm-white flex items-center justify-center text-[#ea580c] hover:bg-warm-surface transition-all cursor-pointer shadow-sm z-20"
             >
               <ArrowLeft className="w-6 h-6 stroke-[1.5]" />
             </motion.button>
             <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }} className="z-20">
               <FillHoverButton
                 type="button"
-                className="swiper-button-next-custom h-14 w-14 rounded-full p-0 shadow-md"
+                className="swiper-button-next-custom touch-target h-12 w-12 sm:h-14 sm:w-14 rounded-full p-0 shadow-md"
                 aria-label="Next slide"
               >
                 <ArrowRight className="w-6 h-6 stroke-[1.5]" />
@@ -123,12 +125,13 @@ export default function PopularPicks() {
         >
           <Swiper
             modules={[Navigation, Autoplay]}
-            spaceBetween={32}
+            spaceBetween={16}
             slidesPerView={1}
             loop={true}
             breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+              640: { spaceBetween: 24, slidesPerView: 1 },
+              768: { spaceBetween: 28, slidesPerView: 2 },
+              1024: { spaceBetween: 32, slidesPerView: 3 },
             }}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -151,7 +154,7 @@ export default function PopularPicks() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ delay: (i % 3) * 0.15, duration: 0.5 }}
-                    className={`group rounded-xl p-8 flex flex-col items-center text-center shadow-md relative border transition-all duration-500 delay-150 overflow-hidden h-full ${isActive ? 'bg-[#ea580c] border-[#ea580c] shadow-[0_20px_50px_rgba(234,88,12,0.22)]' : 'bg-warm-cream border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c]'}`}
+                    className={`group rounded-xl p-5 sm:p-8 flex flex-col items-center text-center shadow-md relative border transition-all duration-500 delay-150 overflow-hidden h-full ${isActive ? 'bg-[#ea580c] border-[#ea580c] shadow-[0_20px_50px_rgba(234,88,12,0.22)]' : 'bg-warm-cream border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c]'}`}
                   >
                     {/* Food Texture Background */}
                     <div className={`absolute inset-[-50px] z-0 ${isActive ? 'opacity-15' : 'opacity-[0.02]'} transition-all duration-[3000ms] delay-150 ease-out pointer-events-none transform translate-x-0 translate-y-0 scale-100 ${isActive ? '' : 'group-hover:-translate-x-3 group-hover:-translate-y-2 group-hover:scale-105'} bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1wPSc1JyBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyMCkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDE4IDAiIC8+CiAgICA8cGF0aCBkPSJNeCAxMmgxOCIgLz4KICAgIDxwYXRoIGQ9Ik00IDE2YTIgMiAwIDAgMCAyIDJoMTJhMiAwIDAgMCAyLTIiIC8+CiAgICA8cGF0aCBkPSJNNCAxNmgxNiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLCA1MCkgcm90YXRlKDQ1KSBzY2FsZSgyKSI+CiAgICA8cGF0aCBkPSJNMTUgMkwzIDIyaDI0WiIgLz4KICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTIiIHI9IjEiIC8+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE2IiByPSIxIiAvPgogICAgPGNpcmNsZSBjeD0iMTgiIGN5PSIxMiIgcj0iMSIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDEyMCkgcm90YXRlKC0xNSkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTYgOGgxMmwtMS41IDEySDcuNVoiIC8+CiAgICA8cGF0aCBkPSJNNCA4aDE2IiAvPgogICAgPHBhdGggZD0iTTEyIDJ2NiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwLCAxNDApIHJvdGF0ZSgxNSkgc2NhbGUoMikiPgogICAgPHJlY3QgeD0iMiIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIHJ4PSI0IiAvPgogICAgPHBhdGggZD0iTTQgMTJoMTYiIC8+CiAgPC9nPgo8L3N2Zz4=')]`} />
@@ -174,7 +177,7 @@ export default function PopularPicks() {
                     </svg>
 
                     {/* Image */}
-                    <div className={`relative flex-shrink-0 w-60 h-60 mt-10 mb-8 rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 delay-150 z-10 bg-warm-cream ${isActive ? 'shadow-[0_20px_40px_rgba(0,0,0,0.25)]' : 'group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)]'}`}>
+                    <div className={`relative flex-shrink-0 w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 mt-6 sm:mt-10 mb-6 sm:mb-8 rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 delay-150 z-10 bg-warm-cream ${isActive ? 'shadow-[0_20px_40px_rgba(0,0,0,0.25)]' : 'group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)]'}`}>
                       <img
                         src={pick.image}
                         alt={pick.name}
@@ -189,13 +192,13 @@ export default function PopularPicks() {
                     {/* Title Container */}
                     <div className="mt-auto pb-4 relative w-full h-[70px] flex items-center justify-center z-10">
                       {/* Default Title */}
-                      <h3 className={`absolute font-black text-2xl uppercase tracking-wider text-stone-900 transition-opacity duration-300 delay-150 ${isActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
+                      <h3 className={`absolute font-black text-lg sm:text-2xl uppercase tracking-wider text-stone-900 transition-opacity duration-300 delay-150 px-2 ${isActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
                         {pick.name}
                       </h3>
 
                       {/* Hover Title */}
                       <h3
-                        className={`absolute text-2xl font-black text-white transition-opacity duration-500 delay-150 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+                        className={`absolute text-lg sm:text-2xl font-black text-white transition-opacity duration-500 delay-150 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                       >
                         ${pick.price.toFixed(2)}
                       </h3>

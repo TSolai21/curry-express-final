@@ -34,7 +34,7 @@ export default function Feedback() {
   const openReview = (review: Review) => setSelectedReview(review);
 
   return (
-    <section className="py-20 md:py-16 !pt-30 bg-[#111111] relative overflow-hidden" id="feedback">
+    <section className="py-12 sm:py-16 md:py-20 bg-[#111111] relative overflow-hidden" id="feedback">
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
@@ -89,7 +89,7 @@ export default function Feedback() {
                 transition={{ duration: 0.4 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
                 onClick={() => openReview(rev)}
-                className="w-[300px] sm:w-[400px] p-6 sm:p-8 bg-stone-900/80 rounded-3xl border border-stone-800 space-y-5 shadow-xl shrink-0 transition-colors hover:border-[#ea580c]/40 hover:bg-stone-800/80 cursor-pointer text-left"
+                className="w-[min(85vw,300px)] sm:w-[360px] md:w-[400px] p-5 sm:p-8 bg-stone-900/80 rounded-2xl sm:rounded-3xl border border-stone-800 space-y-4 sm:space-y-5 shadow-xl shrink-0 transition-colors hover:border-[#ea580c]/40 hover:bg-stone-800/80 cursor-pointer text-left"
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex items-center gap-4">
@@ -127,7 +127,7 @@ export default function Feedback() {
       <AnimatePresence>
         {selectedReview && (
           <div
-            className="fixed inset-0 z-50 flex cursor-pointer items-center justify-center p-4 bg-stone-950/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex cursor-pointer items-end sm:items-center justify-center p-0 sm:p-4 pb-[env(safe-area-inset-bottom)] bg-stone-950/80 backdrop-blur-sm"
             role="dialog"
             aria-modal="true"
             aria-labelledby="review-modal-title"
@@ -138,13 +138,13 @@ export default function Feedback() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 12 }}
               transition={{ duration: 0.25 }}
-              className="bg-stone-900 rounded-2xl border border-stone-800 shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto relative cursor-default"
+              className="bg-stone-900 rounded-t-2xl sm:rounded-2xl border border-stone-800 shadow-2xl w-full max-w-lg max-h-[92dvh] sm:max-h-[90vh] overflow-y-auto relative cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 type="button"
                 onClick={() => setSelectedReview(null)}
-                className="absolute top-4 right-4 text-stone-400 hover:text-white p-1 cursor-pointer z-10"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 touch-target flex items-center justify-center text-stone-400 hover:text-white cursor-pointer z-10"
                 aria-label="Close review"
               >
                 <X className="w-6 h-6" />

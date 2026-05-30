@@ -37,12 +37,12 @@ export default function PopularFoodItems() {
   };
 
   return (
-    <section className="py-20 bg-warm-white" id="menu">
+    <section className="py-12 sm:py-16 md:py-20 bg-warm-white" id="menu">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Title */}
         <motion.div
-          className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between mb-12"
+          className="flex flex-col gap-5 sm:gap-6 md:flex-row md:items-end md:justify-between mb-8 sm:mb-12"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -57,11 +57,11 @@ export default function PopularFoodItems() {
             </motion.h2>
             <motion.div variants={childFadeInUp} className="w-12 h-1 bg-[#ea580c] mx-auto md:mx-0 mt-4" />
           </div>
-          <motion.div variants={childFadeInUp}>
+          <motion.div variants={childFadeInUp} className="w-full md:w-auto">
             <FillHoverButton
               type="button"
               onClick={() => navigate('/menu')}
-              className="rounded-sm px-6 py-3 text-xs font-bold uppercase tracking-wide"
+              className="w-full md:w-auto rounded-sm px-6 py-3 text-xs font-bold uppercase tracking-wide justify-center"
             >
               View Full Menu
             </FillHoverButton>
@@ -75,7 +75,7 @@ export default function PopularFoodItems() {
           viewport={viewport}
           variants={fadeInUp}
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-10 sm:mb-16">
             {TOP_CATEGORIES.map((category, index) => (
               <CategoryCard
                 key={category.id}

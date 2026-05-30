@@ -79,7 +79,7 @@ export default function CategoryCard({
                 </button>
             )}
 
-            <div className="relative z-10 mx-auto mt-6 mb-2 flex h-56 w-56 items-center justify-center sm:h-72 sm:w-72">
+            <div className="relative z-10 mx-auto mt-4 sm:mt-6 mb-2 flex h-44 w-44 items-center justify-center sm:h-56 sm:w-56 md:h-72 md:w-72">
                 <span
                     className="absolute inset-0 rounded-full border-2 border-white/40 pointer-events-none"
                     aria-hidden
@@ -92,7 +92,7 @@ export default function CategoryCard({
                     className="absolute -inset-6 rounded-full border border-orange-200/30 pointer-events-none sm:-inset-7"
                     aria-hidden
                 />
-                <div className="relative h-44 w-44 overflow-hidden rounded-full bg-gradient-to-br from-[#ede0d4] via-[#f0e6da] to-[#e8ddd0] shadow-[0_8px_30px_rgba(0,0,0,0.16)] transition-transform duration-700 ease-in-out group-hover:scale-105 sm:h-56 sm:w-56">
+                <div className="relative h-32 w-32 overflow-hidden rounded-full bg-gradient-to-br from-[#ede0d4] via-[#f0e6da] to-[#e8ddd0] shadow-[0_8px_30px_rgba(0,0,0,0.16)] transition-transform duration-700 ease-in-out group-hover:scale-105 sm:h-44 sm:w-44 md:h-56 md:w-56">
                     <img
                         src={category.image}
                         alt={category.name}
@@ -124,7 +124,7 @@ export default function CategoryCard({
                 ))}
             </div>
 
-            <div className={`absolute bottom-5 left-0 right-0 px-6 z-10 transition-all duration-300 ease-out ${footerVisibleOnHoverOnly ? 'opacity-0 translate-y-6 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto' : 'opacity-100'}`}>
+            <div className={`absolute bottom-4 sm:bottom-5 left-0 right-0 px-4 sm:px-6 z-10 transition-all duration-300 ease-out ${footerVisibleOnHoverOnly ? 'max-md:opacity-100 max-md:translate-y-0 max-md:pointer-events-auto opacity-0 translate-y-6 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto' : 'opacity-100'}`}>
                 <div className="w-full h-[36px] flex items-center justify-center bg-[#222222] text-white text-sm font-bold rounded-full shadow-md">
                     {footerLabel}
                 </div>

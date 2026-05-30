@@ -22,7 +22,7 @@ type FillHoverButtonAsLink = FillHoverButtonBaseProps &
 export type FillHoverButtonProps = FillHoverButtonAsButton | FillHoverButtonAsLink;
 
 const sharedStyles =
-  'group relative overflow-hidden inline-flex items-center justify-center font-bold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ea580c]/40 focus-visible:ring-offset-2';
+  'group relative overflow-hidden inline-flex items-center justify-center min-h-11 font-bold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ea580c]/40 focus-visible:ring-offset-2';
 
 const variantStyles: Record<FillHoverButtonVariant, string> = {
   solid: 'bg-[#222222] text-white',

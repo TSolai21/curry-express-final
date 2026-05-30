@@ -58,7 +58,7 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
 
         {/* Dynamic Green Banner Container */}
         <motion.div
-          className="bg-gradient-to-br from-[#ea580c] to-[#c2410c] rounded-2xl p-6 sm:p-8 text-white relative shadow-2xl flex flex-col md:flex-row items-center justify-between mt-16 "
+          className="bg-gradient-to-br from-[#ea580c] to-[#c2410c] rounded-2xl p-5 sm:p-8 text-white relative shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 mt-8 sm:mt-12 md:mt-16"
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
@@ -94,11 +94,11 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
               Delivery & Takeout
             </span>
 
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-[1.2] text-white font-sans max-w-xl">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight leading-snug text-white max-w-xl">
               Order from Curry Express on DoorDash, Grubhub, or Uber Eats
             </h3>
 
-            <div className="flex gap-4 mt-4 pt-2">
+            <div className="flex flex-wrap gap-3 sm:gap-4 mt-4 pt-2">
               {partners.map((partner, i) => (
                 <motion.button
                   key={partner.name}
@@ -109,7 +109,7 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
                   whileHover={{ scale: 1.08, y: -4 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => handlePartnerClick(partner.name)}
-                  className={`w-16 h-16 sm:w-20 sm:h-20 rounded-xl shadow-lg flex flex-col items-center justify-center cursor-pointer ${partner.color}`}
+                  className={`touch-target w-14 h-14 sm:w-20 sm:h-20 rounded-xl shadow-lg flex flex-col items-center justify-center cursor-pointer shrink-0 ${partner.color}`}
                 >
                   {partner.logo}
                 </motion.button>
@@ -119,7 +119,7 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
 
           {/* Right Side: Delivery Man Illustration */}
           <motion.div
-            className="relative z-10 mt-10 md:mt-0 md:w-[40%] flex justify-end items-end h-full"
+            className="hidden lg:flex relative z-10 mt-6 sm:mt-10 md:mt-0 w-full md:w-[40%] justify-center md:justify-end items-end min-h-[140px] sm:min-h-[180px] md:min-h-0"
             variants={fadeInRight}
           >
             <motion.img
@@ -129,7 +129,7 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="w-48 h-48 md:w-[350px] md:h-[350px] object-contain mix-blend-multiply absolute bottom-0 right-0 md:right-10 pointer-events-none"
+              className="w-36 h-36 sm:w-48 sm:h-48 md:w-[350px] md:h-[350px] object-contain mix-blend-multiply relative md:absolute bottom-0 md:right-10 pointer-events-none mx-auto md:mx-0"
               referrerPolicy="no-referrer"
             />
           </motion.div>
@@ -166,7 +166,7 @@ export default function DeliveryBanner({ overlapBottom = false }: DeliveryBanner
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   <FillHoverButton
                     onClick={() => {
                       setModalOpen(false);

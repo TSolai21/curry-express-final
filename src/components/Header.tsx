@@ -24,6 +24,15 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { name: 'HOME', id: 'home' },
     { name: 'MENU', id: 'menu' },
@@ -79,21 +88,26 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             </nav>
 
             {/* Call to Actions */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <FillHoverButton
                 variant={isScrolled || mobileMenuOpen || !isHome ? 'solid' : 'outline'}
                 onClick={openDoorDash}
-                className="px-5 py-2.5 rounded-sm text-xs tracking-wider uppercase shadow-lg active:scale-95 transition-transform"
+                className="px-3 sm:px-5 py-2.5 rounded-sm text-xs tracking-wider uppercase shadow-lg active:scale-95 transition-transform"
                 id="header-order-online-btn"
               >
-                <ShoppingBag className="w-4 h-4" />
+                <ShoppingBag className="w-4 h-4 shrink-0" />
                 <span className="hidden sm:inline">Order Online</span>
+                <span className="sm:hidden">Order</span>
               </FillHoverButton>
 
               {/* Mobile Menu Button */}
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`md:hidden hover:text-[#ea580c] p-1 focus:outline-none cursor-pointer transition-colors ${isScrolled || mobileMenuOpen || !isHome ? 'text-stone-800' : 'text-white'}`}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-nav-panel"
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+                className={`md:hidden touch-target flex items-center justify-center hover:text-[#ea580c] focus:outline-none cursor-pointer transition-colors ${isScrolled || mobileMenuOpen || !isHome ? 'text-stone-800' : 'text-white'}`}
                 id="header-mobile-toggle"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -106,20 +120,28 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
       {/* Mobile Navigation Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
+          <>
+          <button
+            type="button"
+            aria-label="Close menu overlay"
+            className="fixed inset-0 top-[60px] z-30 bg-stone-950/40 md:hidden cursor-pointer"
+            onClick={() => setMobileMenuOpen(false)}
+          />
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[60px] bg-warm-white z-30 md:hidden flex flex-col p-6 shadow-xl border-t border-warm-border/80"
+            className="fixed inset-x-0 bottom-0 top-[60px] bg-warm-white z-40 md:hidden flex flex-col p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-xl border-t border-warm-border/80 overflow-y-auto overscroll-contain safe-top"
             id="mobile-nav-panel"
           >
-            <div className="flex flex-col space-y-6 mt-4">
+            <div className="flex flex-col space-y-2 mt-2">
               {navLinks.map((link) => (
                 <button
+                  type="button"
                   key={link.id}
                   onClick={() => handleLinkClick(link.id)}
-                  className={`text-left text-lg font-bold tracking-wider py-2 border-b border-stone-100 cursor-pointer ${
+                  className={`text-left text-lg font-bold tracking-wide min-h-12 flex items-center py-2 border-b border-stone-100 cursor-pointer ${
                     isLinkActive(link.id) ? 'text-[#ea580c]' : 'text-stone-800'
                   }`}
                 >
@@ -142,6 +164,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
               </div>
             </div>
           </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

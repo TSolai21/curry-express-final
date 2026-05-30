@@ -11,7 +11,7 @@ interface PageBannerProps {
 
 export default function PageBanner({ title, breadcrumbLabel, children }: PageBannerProps) {
   return (
-    <section className="bg-gradient-to-br from-[#ffd4bc] via-[#ffccb3] to-[#ffb899] relative overflow-hidden py-12 md:py-20 flex items-center justify-center min-h-[260px]">
+    <section className="bg-gradient-to-br from-[#ffd4bc] via-[#ffccb3] to-[#ffb899] relative overflow-hidden py-10 sm:py-12 md:py-20 flex items-center justify-center min-h-[200px] sm:min-h-[240px] md:min-h-[260px]">
       <motion.div
         className="absolute inset-0 pointer-events-none z-0"
         initial={{ opacity: 0 }}
@@ -46,7 +46,7 @@ export default function PageBanner({ title, breadcrumbLabel, children }: PageBan
       >
         <motion.h1
           variants={childFadeInUp}
-          className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4 drop-shadow-md"
+          className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight mb-3 sm:mb-4 drop-shadow-md px-2"
         >
           {title}
         </motion.h1>
@@ -59,7 +59,7 @@ export default function PageBanner({ title, breadcrumbLabel, children }: PageBan
           <span className="text-stone-800">{breadcrumbLabel}</span>
         </motion.div>
         {children ? (
-          <motion.div variants={childFadeInUp} className="mt-8 w-full">
+          <motion.div variants={childFadeInUp} className="mt-6 sm:mt-8 w-full px-1">
             {children}
           </motion.div>
         ) : null}

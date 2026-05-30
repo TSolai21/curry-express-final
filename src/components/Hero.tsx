@@ -19,7 +19,7 @@ export default function Hero({ onViewMenu }: HeroProps) {
   const words = heroContent.title.split(' ');
 
   return (
-    <div className="relative bg-stone-950 text-white min-h-screen lg:min-h-[680px] flex items-center overflow-hidden pt-20" id="home">
+    <div className="relative bg-stone-950 text-white min-h-[100dvh] sm:min-h-screen lg:min-h-[680px] flex items-center overflow-hidden pt-[calc(5rem+env(safe-area-inset-top))]" id="home">
       <motion.div
         className="absolute inset-0 z-0"
         initial={{ scale: 1.08, opacity: 0 }}
@@ -27,12 +27,12 @@ export default function Hero({ onViewMenu }: HeroProps) {
         transition={{ duration: 1.2, ease: easeOut }}
       >
         <img src={burgerImage} alt="Authentic Indian Food Background" className="w-full h-full object-cover opacity-70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-stone-950/90 via-stone-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/70 to-stone-950/50 md:bg-gradient-to-r md:from-stone-950/90 md:via-stone-950/40 md:to-transparent" />
       </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-10 sm:py-12 md:py-20">
         <motion.div
-          className="lg:col-span-12 max-w-4xl mx-auto flex flex-col items-center gap-4 text-center"
+          className="lg:col-span-12 max-w-4xl mx-auto flex flex-col items-center gap-3 sm:gap-4 text-center px-1"
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
@@ -43,7 +43,7 @@ export default function Hero({ onViewMenu }: HeroProps) {
 
           <motion.h1
             variants={childFadeInUp}
-            className="text-4xl sm:text-5xl lg:text-[48px] font-extrabold tracking-tight text-white leading-[1.15] font-sans"
+            className="text-3xl leading-tight sm:text-5xl lg:text-[48px] font-extrabold tracking-tight text-white sm:leading-[1.15]"
           >
             {words.map((word, i) => {
               const isColored = accentWords.has(word.replace(/[^A-Za-z]/g, '').toUpperCase());
@@ -66,7 +66,7 @@ export default function Hero({ onViewMenu }: HeroProps) {
               <FillHoverButton
                 variant="outline"
                 onClick={onViewMenu}
-                className="px-8 py-3.5 rounded-sm text-xs tracking-widest uppercase shadow-lg hover:shadow-orange-900/30"
+                className="w-full max-w-xs sm:w-auto px-8 py-3.5 rounded-sm text-xs tracking-widest uppercase shadow-lg hover:shadow-orange-900/30"
                 id="hero-view-menu-btn"
               >
                 VIEW MENU

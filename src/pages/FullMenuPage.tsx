@@ -29,11 +29,11 @@ export default function FullMenuPage() {
         />
       </PageBanner>
 
-      <section className="max-w-7xl mx-auto px-6 py-10 md:py-14 bg-warm-white">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-14 bg-warm-white">
+        <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between mb-8 sm:mb-10">
           <div>
             <p className="text-eyebrow mb-2">Full Menu</p>
-            <h1 className="text-3xl md:text-4xl font-bold text-stone-900">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-900">
               Browse every category
             </h1>
           </div>
@@ -44,7 +44,7 @@ export default function FullMenuPage() {
             No categories match &ldquo;{searchQuery.trim()}&rdquo;.
           </p>
         ) : (
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {filteredCategories.map((category, index) => (
               <CategoryCard
                 key={category.id}

@@ -110,7 +110,7 @@ export default function CategoryMenuPage() {
         )}
       </PageBanner>
 
-      <section className="max-w-[1200px] mx-auto px-6 py-10 md:py-12 bg-warm-white">
+      <section className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 bg-warm-white">
         {categoryItems.length === 0 ? (
           <motion.p
             className="text-center text-stone-600 py-12"
@@ -131,7 +131,7 @@ export default function CategoryMenuPage() {
           </motion.p>
         ) : (
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8"
             initial="hidden"
             whileInView="visible"
             viewport={viewport}

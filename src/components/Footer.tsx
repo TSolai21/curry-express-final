@@ -28,9 +28,9 @@ export default function Footer({ onNavigate }: FooterProps) {
   };
 
   return (
-    <footer className="bg-warm-surface text-stone-800 border-t border-warm-border/80 pt-20 pb-8" id="footer">
+    <footer className="bg-warm-surface text-stone-800 border-t border-warm-border/80 pt-12 sm:pt-16 md:pt-20 pb-[max(2rem,env(safe-area-inset-bottom))]" id="footer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 items-start mb-16 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-8 items-start mb-10 sm:mb-16 text-left">
           <div className="lg:col-span-4 space-y-5">
             <Link to="/" onClick={() => onNavigate('home')} className="cursor-pointer inline-block">
               <img src="/logo.jpg" alt="Curry Express Logo" className="h-12 w-auto object-contain rounded-full shadow-sm" />
