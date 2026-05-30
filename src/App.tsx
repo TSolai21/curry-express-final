@@ -8,7 +8,6 @@ import CategoryMenuPage from './pages/CategoryMenuPage';
 import FullMenuPage from './pages/FullMenuPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import ReviewsPage from './pages/ReviewsPage';
 
 function AppContent() {
   const [activeSection, setActiveSection] = useState('home');
@@ -42,15 +41,11 @@ function AppContent() {
       setActiveSection('contact');
       return;
     }
-    if (location.pathname === '/reviews') {
-      setActiveSection('reviews');
-      return;
-    }
     if (location.pathname !== '/') {
       setActiveSection('');
       return;
     }
-    const sections = ['home', 'menu', 'offers', 'about'];
+    const sections = ['home', 'menu', 'offers', 'about', 'reviews'];
 
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200; // offset for navbar height
@@ -91,12 +86,6 @@ function AppContent() {
       return;
     }
 
-    if (sectionId === 'reviews') {
-      navigate('/reviews');
-      setActiveSection('reviews');
-      return;
-    }
-
     if (sectionId === 'home') {
       navigate('/');
       setActiveSection('home');
@@ -130,7 +119,6 @@ function AppContent() {
         <Route path="/category/:categoryId" element={<CategoryMenuPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/reviews" element={<ReviewsPage />} />
       </Routes>
 
       {/* Footer */}

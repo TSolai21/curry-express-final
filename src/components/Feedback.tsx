@@ -34,7 +34,7 @@ export default function Feedback() {
   const openReview = (review: Review) => setSelectedReview(review);
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-[#111111] relative overflow-hidden" id="feedback">
+    <section className="py-12 sm:py-16 md:py-20 bg-[#111111] relative overflow-hidden" id="reviews">
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
