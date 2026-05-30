@@ -142,7 +142,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                   type="button"
                   key={link.id}
                   onClick={() => handleLinkClick(link.id)}
-                  className={`text-left text-lg font-bold tracking-wide min-h-12 flex items-center py-2 border-b border-stone-100 cursor-pointer ${
+                  className={`text-left text-lg font-bold tracking-wide min-h-12 flex items-center py-2 border-b border-black cursor-pointer ${
                     isLinkActive(link.id) ? 'text-[#ea580c]' : 'text-stone-800'
                   }`}
                 >
@@ -150,7 +150,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
                 </button>
               ))}
               
-              <div className="pt-6 border-t border-stone-200 flex flex-col gap-4">
+              <div className="pt-6 flex flex-col gap-4">
                 <div className="flex items-center gap-3 text-stone-600">
                   <Phone className="w-4 h-4 text-[#ea580c] flex-shrink-0" />
                   <span className="text-sm font-semibold">+1 (346) 863-1124</span>
