@@ -1,22 +1,37 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { CATEGORIES, MENU_ITEMS } from '../data';
 import DeliveryBanner from '../components/DeliveryBanner';
 import PageBanner from '../components/PageBanner';
+import MenuSearchInput from '../components/MenuSearchInput';
 import { Star, Heart } from 'lucide-react';
 import { openDoorDash } from '../constants';
 import { fadeInUp, viewport } from '../utils/motion';
+import { matchesSearch } from '../utils/search';
 
 export default function CategoryMenuPage() {
   const { categoryId } = useParams();
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const activeCardIdRef = useRef<string | null>(null);
   const cardRefs = useRef(new Map<string, HTMLElement>());
 
   const category = CATEGORIES.find((c) => c.id === categoryId);
   const categoryItems = MENU_ITEMS.filter((item) => item.category === categoryId);
+
+  const filteredItems = useMemo(() => {
+    const query = searchQuery.trim();
+    if (!query) return categoryItems;
+    return categoryItems.filter((item) =>
+      matchesSearch(query, item.name, item.description)
+    );
+  }, [categoryItems, searchQuery]);
+
+  useEffect(() => {
+    setSearchQuery('');
+  }, [categoryId]);
 
   useEffect(() => {
     activeCardIdRef.current = activeCardId;
@@ -67,7 +82,7 @@ export default function CategoryMenuPage() {
       window.removeEventListener('resize', onScroll);
       if (rafId !== null) window.cancelAnimationFrame(rafId);
     };
-  }, [categoryItems]);
+  }, [filteredItems]);
 
   if (!category) {
     return (
@@ -88,6 +103,15 @@ export default function CategoryMenuPage() {
       <PageBanner title={category.name} breadcrumbLabel={category.name} />
 
       <section className="max-w-[1200px] mx-auto px-6 py-10 md:py-12">
+        {categoryItems.length > 0 && (
+          <MenuSearchInput
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder={`Search ${category.name.toLowerCase()}...`}
+            className="mb-10"
+          />
+        )}
+
         {categoryItems.length === 0 ? (
           <motion.p
             className="text-center text-stone-500 py-12"
@@ -96,6 +120,15 @@ export default function CategoryMenuPage() {
             transition={{ duration: 0.5 }}
           >
             No items found in this category yet.
+          </motion.p>
+        ) : filteredItems.length === 0 ? (
+          <motion.p
+            className="text-center text-stone-500 py-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            No items match &ldquo;{searchQuery.trim()}&rdquo;.
           </motion.p>
         ) : (
           <motion.div
@@ -108,7 +141,7 @@ export default function CategoryMenuPage() {
               visible: { transition: { staggerChildren: 0.08 } },
             }}
           >
-            {categoryItems.map((item, index) => {
+            {filteredItems.map((item, index) => {
               const isActive = activeCardId === item.id;
               return (
                 <motion.div
@@ -123,7 +156,7 @@ export default function CategoryMenuPage() {
                   }}
                   variants={fadeInUp}
                   whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                  className={`group h-full p-4 pt-6 pb-[60px] ${isActive ? 'bg-[#ea580c] shadow-md border-transparent' : 'bg-orange-50'} rounded-2xl text-center flex flex-col items-center shadow-[0_3px_12px_rgba(0,0,0,0.02)] border border-orange-100 transition-colors duration-300 hover:bg-[#ea580c] hover:shadow-md hover:border-transparent relative overflow-hidden cursor-pointer ${isActive ? 'border-amber-500 ring-2 ring-amber-200' : ''}`}
+                  className={`group h-full p-4 pt-6 pb-24 ${isActive ? 'bg-[#ea580c] shadow-md border-transparent' : 'bg-orange-50'} rounded-2xl text-center flex flex-col items-center shadow-[0_3px_12px_rgba(0,0,0,0.02)] border border-orange-100 transition-colors duration-300 hover:bg-[#ea580c] hover:shadow-md hover:border-transparent relative overflow-hidden cursor-pointer ${isActive ? 'border-amber-500 ring-2 ring-amber-200' : ''}`}
                   onClick={() => openDoorDash()}
                 >
                   <div className={`absolute inset-[-50px] z-0 ${isActive ? 'opacity-[0.03]' : 'opacity-0'} group-hover:opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1wPSc1JyBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyMCkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDE4IDAiIC8+CiAgICA8cGF0aCBkPSJNeCAxMmgxOCIgLz4KICAgIDxwYXRoIGQ9Ik00IDE2YTIgMiAwIDAgMCAyIDJoMTJhMiAwIDAgMCAyLTIiIC8+CiAgICA8cGF0aCBkPSJNNCAxNmgxNiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLCA1MCkgcm90YXRlKDQ1KSBzY2FsZSgyKSI+CiAgICA8cGF0aCBkPSJNMTUgMkwzIDIyaDI0WiIgLz4KICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTIiIHI9IjEiIC8+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE2IiByPSIxIiAvPgogICAgPGNpcmNsZSBjeD0iMTgiIGN5PSIxMiIgcj0iMSIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDEyMCkgcm90YXRlKC0xNSkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTYgOGgxMmwtMS41IDEySDcuNVoiIC8+CiAgICA8cGF0aCBkPSJNNCA4aDE2IiAvPgogICAgPHBhdGggZD0iTTEyIDJ2NiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwLCAxNDApIHJvdGF0ZSgxNSkgc2NhbGUoMikiPgogICAgPHJlY3QgeD0iMiIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIHJ4PSI0IiAvPgogICAgPHBhdGggZD0iTTQgMTJoMTYiIC8+CiAgPC9nPgo8L3N2Zz4=')] mix-blend-multiply transition-opacity duration-500 pointer-events-none`} />
@@ -157,7 +190,7 @@ export default function CategoryMenuPage() {
                     {item.name}
                   </h3>
 
-                  <p className={`text-sm mb-4 line-clamp-2 transition-colors duration-300 z-10 ${isActive ? 'text-white/90' : 'text-stone-500 group-hover:text-white/90'}`}>
+                  <p className={`text-sm mb-4 px-1 leading-relaxed transition-colors duration-300 z-10 ${isActive ? 'text-white/90' : 'text-stone-500 group-hover:text-white/90'}`}>
                     {item.description}
                   </p>
 
