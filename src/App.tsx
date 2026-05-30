@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import ItemDetailModal from './components/ItemDetailModal';
-import { MenuItem } from './types';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
 import HomePage from './pages/HomePage';
@@ -11,7 +9,6 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
 function AppContent() {
-  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [activeSection, setActiveSection] = useState('home');
   const navigate = useNavigate();
   const location = useLocation();
@@ -48,10 +45,10 @@ function AppContent() {
       return;
     }
     const sections = ['home', 'menu', 'offers', 'about'];
-    
+
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200; // offset for navbar height
-      
+
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -116,20 +113,14 @@ function AppContent() {
       />
 
       <Routes>
-        <Route path="/" element={<HomePage onSelectItem={(item) => setSelectedItem(item)} />} />
-        <Route path="/category/:categoryId" element={<CategoryMenuPage onSelectItem={(item) => setSelectedItem(item)} />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/category/:categoryId" element={<CategoryMenuPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
 
       {/* Footer */}
       <Footer onNavigate={handleNavigate} />
-
-      {/* Interactive popups drawers */}
-      <ItemDetailModal
-        item={selectedItem}
-        onClose={() => setSelectedItem(null)}
-      />
 
       {/* Floating Action Buttons */}
       <ScrollToTop />

@@ -6,14 +6,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import alooTikkaBurgerImage from '../assets/images/aloo_tikka_burger_1780049412009.png';
-import { MenuItem } from '../types';
 import { childFadeInUp, fadeInUp, staggerContainer, viewport } from '../utils/motion';
 
-interface PopularPicksProps {
-  onSelectItem: (item: MenuItem) => void;
-}
-
-export default function PopularPicks({ onSelectItem }: PopularPicksProps) {
+export default function PopularPicks() {
   // Hardcoded mapping to match the exact items in image
   const picks = [
     {
@@ -125,8 +120,7 @@ export default function PopularPicks({ onSelectItem }: PopularPicksProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ delay: (i % 3) * 0.15, duration: 0.5 }}
-                    className="group rounded-xl p-8 flex flex-col items-center text-center shadow-md relative bg-[#FAF8F5] border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c] transition-all duration-500 overflow-hidden cursor-pointer h-full"
-                    onClick={() => onSelectItem(pick as MenuItem)}
+                    className="group rounded-xl p-8 flex flex-col items-center text-center shadow-md relative bg-[#FAF8F5] border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c] transition-all duration-500 overflow-hidden h-full"
                   >
                     {/* Food Texture Background */}
                     <div className="absolute inset-[-50px] z-0 opacity-[0.02] group-hover:opacity-15 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1wPSc1JyBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyMCkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDE4IDAiIC8+CiAgICA8cGF0aCBkPSJNeCAxMmgxOCIgLz4KICAgIDxwYXRoIGQ9Ik00IDE2YTIgMiAwIDAgMCAyIDJoMTJhMiAwIDAgMCAyLTIiIC8+CiAgICA8cGF0aCBkPSJNNCAxNmgxNiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLCA1MCkgcm90YXRlKDQ1KSBzY2FsZSgyKSI+CiAgICA8cGF0aCBkPSJNMTUgMkwzIDIyaDI0WiIgLz4KICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTIiIHI9IjEiIC8+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE2IiByPSIxIiAvPgogICAgPGNpcmNsZSBjeD0iMTgiIGN5PSIxMiIgcj0iMSIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDEyMCkgcm90YXRlKC0xNSkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTYgOGgxMmwtMS41IDEySDcuNVoiIC8+CiAgICA8cGF0aCBkPSJNNCA4aDE2IiAvPgogICAgPHBhdGggZD0iTTEyIDJ2NiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwLCAxNDApIHJvdGF0ZSgxNSkgc2NhbGUoMikiPgogICAgPHJlY3QgeD0iMiIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIHJ4PSI0IiAvPgogICAgPHBhdGggZD0iTTQgMTJoMTYiIC8+CiAgPC9nPgo8L3N2Zz4=')] mix-blend-multiply transition-all duration-[3000ms] ease-out pointer-events-none transform translate-x-0 translate-y-0 scale-100 group-hover:-translate-x-3 group-hover:-translate-y-2 group-hover:scale-105" />

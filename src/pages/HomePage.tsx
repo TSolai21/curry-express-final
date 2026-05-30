@@ -7,22 +7,17 @@ import Features from '../components/Features';
 import About from '../components/About';
 import DeliveryBanner from '../components/DeliveryBanner';
 import Feedback from '../components/Feedback';
-import { MenuItem } from '../types';
 
-interface HomePageProps {
-  onSelectItem: (item: MenuItem) => void;
-}
-
-export default function HomePage({ onSelectItem }: HomePageProps) {
+export default function HomePage() {
   return (
     <main className="flex-1">
       <Hero onViewMenu={() => {
         const el = document.getElementById('menu');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }} />
-      <PopularPicks onSelectItem={onSelectItem} />
+      <PopularPicks />
       <Offers />
-      <PopularFoodItems onSelectItem={onSelectItem} />
+      <PopularFoodItems />
       <Features />
       <About />
       <DeliveryBanner overlapBottom={true} />
