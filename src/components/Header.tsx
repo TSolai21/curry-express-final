@@ -38,6 +38,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
     { name: 'MENU', id: 'menu' },
     { name: 'OFFERS', id: 'offers' },
     { name: 'ABOUT', id: 'about' },
+    { name: 'REVIEWS', id: 'reviews' },
     { name: 'CONTACT', id: 'contact' },
   ];
 

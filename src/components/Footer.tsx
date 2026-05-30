@@ -8,6 +8,7 @@ interface FooterProps {
 const quickLinks = [
   { name: 'Home', to: '/', sectionId: 'home' },
   { name: 'About', to: '/about', sectionId: 'about' },
+  { name: 'Reviews', to: '/reviews', sectionId: 'reviews' },
   { name: 'Menu', to: '/#menu', sectionId: 'menu' },
   { name: 'Contact', to: '/contact', sectionId: 'contact' },
 ];
@@ -16,7 +17,7 @@ export default function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const handleLinkClick = (sectionId: string, e: React.MouseEvent) => {
-    if (sectionId === 'about' || sectionId === 'contact') {
+    if (sectionId === 'about' || sectionId === 'contact' || sectionId === 'reviews') {
       e.preventDefault();
       onNavigate(sectionId);
       return;
