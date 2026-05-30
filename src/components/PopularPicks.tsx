@@ -1,3 +1,4 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,6 +10,25 @@ import alooTikkaBurgerImage from '../assets/images/aloo_tikka_burger_17800494120
 import { childFadeInUp, fadeInUp, staggerContainer, viewport } from '../utils/motion';
 
 export default function PopularPicks() {
+  const swiperRef = useRef<any>(null);
+  const [activePickId, setActivePickId] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const handleMouseEnter = () => {
+    swiperRef.current?.autoplay?.stop();
+  };
+
+  const handleMouseLeave = () => {
+    swiperRef.current?.autoplay?.start();
+  };
+
+  useEffect(() => {
+    const updateMobile = () => setIsMobile(window.innerWidth < 768);
+    updateMobile();
+    window.addEventListener('resize', updateMobile);
+    return () => window.removeEventListener('resize', updateMobile);
+  }, []);
+
   // Hardcoded mapping to match the exact items in image
   const picks = [
     {
@@ -95,6 +115,8 @@ export default function PopularPicks() {
           whileInView="visible"
           viewport={viewport}
           variants={fadeInUp}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           <Swiper
             modules={[Navigation, Autoplay]}
@@ -105,6 +127,11 @@ export default function PopularPicks() {
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+              setActivePickId(picks[swiper.realIndex]?.id ?? null);
+            }}
+            onSlideChange={(swiper) => setActivePickId(picks[swiper.realIndex]?.id ?? null)}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
             navigation={{
               prevEl: '.swiper-button-prev-custom',
@@ -113,6 +140,7 @@ export default function PopularPicks() {
             className="w-full pb-12 overflow-visible"
           >
             {picks.map((pick, i) => {
+              const isActive = isMobile && activePickId === pick.id;
               return (
                 <SwiperSlide key={pick.id} className="h-auto">
                   <motion.div
@@ -120,30 +148,30 @@ export default function PopularPicks() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ delay: (i % 3) * 0.15, duration: 0.5 }}
-                    className="group rounded-xl p-8 flex flex-col items-center text-center shadow-md relative bg-[#FAF8F5] border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c] transition-all duration-500 overflow-hidden h-full"
+                    className={`group rounded-xl p-8 flex flex-col items-center text-center shadow-md relative border transition-all duration-500 delay-150 overflow-hidden h-full ${isActive ? 'bg-[#ea580c] border-[#ea580c] shadow-[0_20px_50px_rgba(234,88,12,0.22)]' : 'bg-[#FAF8F5] border border-stone-100 hover:bg-[#ea580c] hover:border-[#ea580c]'}`}
                   >
                     {/* Food Texture Background */}
-                    <div className="absolute inset-[-50px] z-0 opacity-[0.02] group-hover:opacity-15 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1wPSc1JyBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyMCkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDE4IDAiIC8+CiAgICA8cGF0aCBkPSJNeCAxMmgxOCIgLz4KICAgIDxwYXRoIGQ9Ik00IDE2YTIgMiAwIDAgMCAyIDJoMTJhMiAwIDAgMCAyLTIiIC8+CiAgICA8cGF0aCBkPSJNNCAxNmgxNiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLCA1MCkgcm90YXRlKDQ1KSBzY2FsZSgyKSI+CiAgICA8cGF0aCBkPSJNMTUgMkwzIDIyaDI0WiIgLz4KICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTIiIHI9IjEiIC8+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE2IiByPSIxIiAvPgogICAgPGNpcmNsZSBjeD0iMTgiIGN5PSIxMiIgcj0iMSIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDEyMCkgcm90YXRlKC0xNSkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTYgOGgxMmwtMS41IDEySDcuNVoiIC8+CiAgICA8cGF0aCBkPSJNNCA4aDE2IiAvPgogICAgPHBhdGggZD0iTTEyIDJ2NiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwLCAxNDApIHJvdGF0ZSgxNSkgc2NhbGUoMikiPgogICAgPHJlY3QgeD0iMiIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIHJ4PSI0IiAvPgogICAgPHBhdGggZD0iTTQgMTJoMTYiIC8+CiAgPC9nPgo8L3N2Zz4=')] mix-blend-multiply transition-all duration-[3000ms] ease-out pointer-events-none transform translate-x-0 translate-y-0 scale-100 group-hover:-translate-x-3 group-hover:-translate-y-2 group-hover:scale-105" />
+                    <div className={`absolute inset-[-50px] z-0 ${isActive ? 'opacity-15' : 'opacity-[0.02]'} transition-all duration-[3000ms] delay-150 ease-out pointer-events-none transform translate-x-0 translate-y-0 scale-100 ${isActive ? '' : 'group-hover:-translate-x-3 group-hover:-translate-y-2 group-hover:scale-105'} bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1wPSc1JyBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyMCkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDE4IDAiIC8+CiAgICA8cGF0aCBkPSJNeCAxMmgxOCIgLz4KICAgIDxwYXRoIGQ9Ik00IDE2YTIgMiAwIDAgMCAyIDJoMTJhMiAwIDAgMCAyLTIiIC8+CiAgICA8cGF0aCBkPSJNNCAxNmgxNiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLCA1MCkgcm90YXRlKDQ1KSBzY2FsZSgyKSI+CiAgICA8cGF0aCBkPSJNMTUgMkwzIDIyaDI0WiIgLz4KICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTIiIHI9IjEiIC8+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE2IiByPSIxIiAvPgogICAgPGNpcmNsZSBjeD0iMTgiIGN5PSIxMiIgcj0iMSIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDEyMCkgcm90YXRlKC0xNSkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTYgOGgxMmwtMS41IDEySDcuNVoiIC8+CiAgICA8cGF0aCBkPSJNNCA4aDE2IiAvPgogICAgPHBhdGggZD0iTTEyIDJ2NiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwLCAxNDApIHJvdGF0ZSgxNSkgc2NhbGUoMikiPgogICAgPHJlY3QgeD0iMiIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIHJ4PSI0IiAvPgogICAgPHBhdGggZD0iTTQgMTJoMTYiIC8+CiAgPC9nPgo8L3N2Zz4=')]`} />
 
                     {/* Top Left Name (Hover) */}
-                    <div className="absolute top-8 left-8 text-sm font-black uppercase tracking-widest text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+                    <div className={`absolute top-8 left-8 text-sm font-black uppercase tracking-widest text-white transition-opacity duration-500 delay-150 z-20 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
                       {pick.name}
                     </div>
 
                     {/* Left Splash SVG (Hover) */}
-                    <svg className="absolute left-6 top-[55%] -translate-y-1/2 w-16 h-16 text-white drop-shadow-md opacity-0 scale-50 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 group-hover:delay-[150ms] z-20" viewBox="0 0 100 100" fill="currentColor">
+                    <svg className={`absolute left-6 top-[55%] -translate-y-1/2 w-16 h-16 text-white drop-shadow-md transition-all duration-500 delay-150 group-hover:delay-[150ms] z-20 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-50 group-hover:scale-100 group-hover:opacity-100'}`} viewBox="0 0 100 100" fill="currentColor">
                       <circle cx="15" cy="40" r="10" />
                       <path d="M 20 50 C 40 80, 80 60, 95 55 C 75 50, 50 40, 30 40 Z" />
                     </svg>
 
                     {/* Right Splash SVG (Hover) */}
-                    <svg className="absolute right-4 top-[25%] w-16 h-16 text-white drop-shadow-md opacity-0 scale-50 group-hover:scale-100 group-hover:opacity-100 transition-all duration-500 group-hover:delay-[300ms] z-20" viewBox="0 0 100 100" fill="currentColor">
+                    <svg className={`absolute right-4 top-[25%] w-16 h-16 text-white drop-shadow-md transition-all duration-500 delay-150 group-hover:delay-[300ms] z-20 ${isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-50 group-hover:scale-100 group-hover:opacity-100'}`} viewBox="0 0 100 100" fill="currentColor">
                       <circle cx="85" cy="65" r="10" />
                       <path d="M 80 55 C 60 25, 20 45, 5 50 C 25 55, 50 65, 70 65 Z" />
                     </svg>
 
                     {/* Image */}
-                    <div className="relative flex-shrink-0 w-60 h-60 mt-10 mb-8 rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] transition-all duration-500 z-10 bg-[#FAF8F5]">
+                    <div className={`relative flex-shrink-0 w-60 h-60 mt-10 mb-8 rounded-full overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-500 delay-150 z-10 bg-[#FAF8F5] ${isActive ? 'shadow-[0_20px_40px_rgba(0,0,0,0.25)]' : 'group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)]'}`}>
                       <img
                         src={pick.image}
                         alt={pick.name}
@@ -153,18 +181,18 @@ export default function PopularPicks() {
                     </div>
 
                     {/* Divider */}
-                    <div className="w-16 h-[3px] mb-8 bg-[#e03131] group-hover:bg-[#FAF8F5] transition-colors duration-500 z-10" />
+                    <div className={`w-16 h-[3px] mb-8 transition-colors duration-500 delay-150 z-10 ${isActive ? 'bg-[#FAF8F5]' : 'bg-[#e03131] group-hover:bg-[#FAF8F5]'}`} />
 
                     {/* Title Container */}
                     <div className="mt-auto pb-4 relative w-full h-[70px] flex items-center justify-center z-10">
                       {/* Default Title */}
-                      <h3 className="absolute font-black text-2xl uppercase tracking-wider text-stone-900 group-hover:opacity-0 transition-opacity duration-300">
+                      <h3 className={`absolute font-black text-2xl uppercase tracking-wider text-stone-900 transition-opacity duration-300 delay-150 ${isActive ? 'opacity-0' : 'group-hover:opacity-0'}`}>
                         {pick.name}
                       </h3>
 
                       {/* Hover Title */}
                       <h3
-                        className="absolute text-2xl font-black text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        className={`absolute text-2xl font-black text-white transition-opacity duration-500 delay-150 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
                       >
                         ${pick.price.toFixed(2)}
                       </h3>

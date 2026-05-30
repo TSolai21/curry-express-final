@@ -8,10 +8,11 @@ import { childFadeInUp, fadeInUp, staggerContainer, viewport } from '../utils/mo
 
 export default function PopularFoodItems() {
   const [favorites, setFavorites] = useState<string[]>([]);
-  const [isHovered, setIsHovered] = useState(false);
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
   const activeCardIdRef = useRef<string | null>(null);
-  const cardRefs = useRef(new Map<string, HTMLElement>());
+  const cardRefs = useRef(new Map<string, HTMLElement[]>());
+  const marqueeRef = useRef<HTMLDivElement | null>(null);
   const navigate = useNavigate();
 
   // Load initial favorites from localStorage
@@ -43,7 +44,7 @@ export default function PopularFoodItems() {
   }, [activeCardId]);
 
   useEffect(() => {
-    let rafId: number | null = null;
+    let frameId: number | null = null;
 
     const updateActiveCard = () => {
       if (window.innerWidth >= 768) {
@@ -57,34 +58,39 @@ export default function PopularFoodItems() {
       let bestDistance = Number.POSITIVE_INFINITY;
       const viewportCenter = window.innerWidth / 2;
 
-      cardRefs.current.forEach((element, id) => {
-        const rect = element.getBoundingClientRect();
-        const cardCenter = rect.left + rect.width / 2;
-        const distance = Math.abs(cardCenter - viewportCenter);
-        if (distance < bestDistance) {
-          bestDistance = distance;
-          bestId = id;
-        }
+      cardRefs.current.forEach((elements, id) => {
+        elements.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          const cardCenter = rect.left + rect.width / 2;
+          const distance = Math.abs(cardCenter - viewportCenter);
+          if (distance < bestDistance) {
+            bestDistance = distance;
+            bestId = id;
+          }
+        });
       });
 
       if (bestId && bestId !== activeCardIdRef.current) {
         setActiveCardId(bestId);
       }
+
+      frameId = window.requestAnimationFrame(updateActiveCard);
     };
 
-    const onScroll = () => {
-      if (rafId !== null) window.cancelAnimationFrame(rafId);
-      rafId = window.requestAnimationFrame(updateActiveCard);
+    frameId = window.requestAnimationFrame(updateActiveCard);
+
+    const onResize = () => {
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+      frameId = window.requestAnimationFrame(updateActiveCard);
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    updateActiveCard();
+    window.addEventListener('resize', onResize);
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (rafId !== null) window.cancelAnimationFrame(rafId);
+      window.removeEventListener('resize', onResize);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
     };
   }, []);
 
@@ -117,7 +123,7 @@ export default function PopularFoodItems() {
           variants={fadeInUp}
         >
           <div
-            className="overflow-hidden relative w-full mb-16 -mx-4 px-4 sm:mx-0 sm:px-0 flex"
+            className="overflow-hidden relative w-full mb-16 -mx-4 px-4 sm:mx-0 sm:px-0"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -126,6 +132,7 @@ export default function PopularFoodItems() {
             <div className="absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-[#FDFBF7] to-transparent z-20 pointer-events-none" />
 
             <div
+              ref={marqueeRef}
               className="flex w-max gap-6 animate-marquee"
               style={{ animationPlayState: isHovered ? 'paused' : 'running' }}
             >
@@ -137,10 +144,18 @@ export default function PopularFoodItems() {
                     key={`${category.id}-${index}`}
                     data-card-id={category.id}
                     ref={(el) => {
+                      const currentList = cardRefs.current.get(category.id) ?? [];
                       if (el) {
-                        cardRefs.current.set(category.id, el);
+                        if (!currentList.includes(el)) {
+                          cardRefs.current.set(category.id, [...currentList, el]);
+                        }
                       } else {
-                        cardRefs.current.delete(category.id);
+                        const filtered = currentList.filter((item) => item !== el);
+                        if (filtered.length > 0) {
+                          cardRefs.current.set(category.id, filtered);
+                        } else {
+                          cardRefs.current.delete(category.id);
+                        }
                       }
                     }}
                     initial={{ opacity: 0, y: 24 }}
@@ -149,7 +164,7 @@ export default function PopularFoodItems() {
                     transition={{ delay: (index % CATEGORIES.length) * 0.06, duration: 0.45 }}
                     whileHover={{ y: -6, transition: { duration: 0.25 } }}
                     onClick={() => navigate(`/category/${category.id}`)}
-                    className={`group w-[280px] sm:w-[320px] shrink-0 h-full p-4 pt-6 pb-[60px] rounded-2xl cursor-pointer text-center flex flex-col items-center shadow-[0_3px_12px_rgba(0,0,0,0.02)] transition-all duration-300 relative overflow-hidden ${isActive ? 'bg-[#ea580c] shadow-md border-transparent' : 'bg-orange-50'} hover:bg-[#ea580c] hover:shadow-md hover:border-transparent border border-orange-100`}
+                    className={`group w-[280px] sm:w-[320px] shrink-0 h-full p-4 pt-6 pb-[60px] rounded-2xl cursor-pointer text-center flex flex-col items-center shadow-[0_3px_12px_rgba(0,0,0,0.02)] transition-all duration-300 relative overflow-hidden snap-center ${isActive ? 'bg-[#ea580c] shadow-md border-transparent' : 'bg-orange-50'} hover:bg-[#ea580c] hover:shadow-md hover:border-transparent border border-orange-100`}
                   >
                     {/* Background Texture (Hover/Selected) */}
                     <div className={`absolute inset-[-50px] z-0 ${isActive ? 'opacity-[0.03]' : 'opacity-0'} group-hover:opacity-[0.03] bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1wPSc1JyBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLCAyMCkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAxIDE4IDAiIC8+CiAgICA8cGF0aCBkPSJNeCAxMmgxOCIgLz4KICAgIDxwYXRoIGQ9Ik00IDE2YTIgMiAwIDAgMCAyIDJoMTJhMiAwIDAgMCAyLTIiIC8+CiAgICA8cGF0aCBkPSJNNCAxNmgxNiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLCA1MCkgcm90YXRlKDQ1KSBzY2FsZSgyKSI+CiAgICA8cGF0aCBkPSJNMTUgMkwzIDIyaDI0WiIgLz4KICAgIDxjaXJjbGUgY3g9IjEwIiBjeT0iMTIiIHI9IjEiIC8+CiAgICA8Y2lyY2xlIGN4PSIxNCIgY3k9IjE2IiByPSIxIiAvPgogICAgPGNpcmNsZSBjeD0iMTgiIGN5PSIxMiIgcj0iMSIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAsIDEyMCkgcm90YXRlKC0xNSkgc2NhbGUoMikiPgogICAgPHBhdGggZD0iTTYgOGgxMmwtMS41IDEySDcuNVoiIC8+CiAgICA8cGF0aCBkPSJNNCA4aDE2IiAvPgogICAgPHBhdGggZD0iTTEyIDJ2NiIgLz4KICA8L2c+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTMwLCAxNDApIHJvdGF0ZSgxNSkgc2NhbGUoMikiPgogICAgPHJlY3QgeD0iMiIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjgiIHJ4PSI0IiAvPgogICAgPHBhdGggZD0iTTQgMTJoMTYiIC8+CiAgPC9nPgo8L3N2Zz4=')] mix-blend-multiply transition-opacity duration-500 pointer-events-none`} />
