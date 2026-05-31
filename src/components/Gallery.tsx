@@ -55,7 +55,7 @@ export default function Gallery() {
             slidesPerView={3}
             spaceBetween={8}
             allowTouchMove={false}
-            className="w-full h-full rounded-lg shadow-md [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-full rounded-lg [&>.swiper-wrapper]:!ease-linear"
           >
             {items1.concat(items4).map(renderSlide)}
           </Swiper>
@@ -70,7 +70,7 @@ export default function Gallery() {
             slidesPerView={3}
             spaceBetween={8}
             allowTouchMove={false}
-            className="w-full h-full rounded-lg shadow-md [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-full rounded-lg [&>.swiper-wrapper]:!ease-linear"
           >
             {items2.concat(items1).map(renderSlide)}
           </Swiper>
@@ -85,7 +85,7 @@ export default function Gallery() {
             slidesPerView={3}
             spaceBetween={8}
             allowTouchMove={false}
-            className="w-full h-full rounded-lg shadow-md [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-full rounded-lg [&>.swiper-wrapper]:!ease-linear"
           >
             {items3.concat(items2).map(renderSlide)}
           </Swiper>
@@ -106,7 +106,7 @@ export default function Gallery() {
             slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items1.concat(items1).map(renderSlide)}
           </Swiper>
@@ -121,7 +121,7 @@ export default function Gallery() {
             slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items2.concat(items2).map(renderSlide)}
           </Swiper>
@@ -136,7 +136,7 @@ export default function Gallery() {
             slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items3.concat(items3).map(renderSlide)}
           </Swiper>
@@ -151,7 +151,7 @@ export default function Gallery() {
             slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items4.concat(items4).map(renderSlide)}
           </Swiper>
