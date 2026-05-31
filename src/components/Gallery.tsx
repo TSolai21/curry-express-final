@@ -19,9 +19,9 @@ const items4 = allItems.slice(11, 15); // Slight overlap to ensure 4 images
 export default function Gallery() {
   const renderSlide = (item: { src: string, name: string }, i: number) => (
     <SwiperSlide key={i} className="h-full relative group cursor-pointer overflow-hidden rounded-2xl">
-      <img src={item.src} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-        <span className="text-white font-bold text-lg sm:text-xl text-center tracking-widest uppercase translate-y-4 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-md">
+      <img src={item.src} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110" />
+      <div className="absolute inset-0 bg-black/60 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+        <span className="text-white font-bold text-lg sm:text-xl text-center tracking-widest uppercase translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 drop-shadow-md">
           {item.name}
         </span>
       </div>
@@ -40,20 +40,51 @@ export default function Gallery() {
           </h2>
         </div>
 
-        {/* Mobile Single Slider (shows all items) */}
-        <div className="block md:hidden max-w-[320px] mx-auto w-full">
+        {/* Mobile 3-Column Grid */}
+        <div className="md:hidden grid grid-cols-3 gap-2 h-[320px] max-w-md mx-auto px-2 pointer-events-none">
+          {/* Slider 1: Vertical Up */}
           <Swiper
             modules={[Autoplay]}
             direction="vertical"
             loop={true}
             autoplay={{ delay: 0, disableOnInteraction: false }}
-            speed={3000}
-            slidesPerView={1}
-            spaceBetween={24}
-            allowTouchMove={true}
-            className="w-full aspect-[3/4] rounded-2xl shadow-2xl [&>.swiper-wrapper]:!ease-linear"
+            speed={3500}
+            slidesPerView={3}
+            spaceBetween={8}
+            allowTouchMove={false}
+            className="w-full h-full rounded-lg shadow-md [&>.swiper-wrapper]:!ease-linear"
           >
-            {allItems.map(renderSlide)}
+            {items1.concat(items4).map(renderSlide)}
+          </Swiper>
+
+          {/* Slider 2: Vertical Down */}
+          <Swiper
+            modules={[Autoplay]}
+            direction="vertical"
+            loop={true}
+            autoplay={{ delay: 0, disableOnInteraction: false, reverseDirection: true }}
+            speed={4000}
+            slidesPerView={3}
+            spaceBetween={8}
+            allowTouchMove={false}
+            className="w-full h-full rounded-lg shadow-md [&>.swiper-wrapper]:!ease-linear"
+          >
+            {items2.concat(items1).map(renderSlide)}
+          </Swiper>
+
+          {/* Slider 3: Vertical Up */}
+          <Swiper
+            modules={[Autoplay]}
+            direction="vertical"
+            loop={true}
+            autoplay={{ delay: 0, disableOnInteraction: false }}
+            speed={4500}
+            slidesPerView={3}
+            spaceBetween={8}
+            allowTouchMove={false}
+            className="w-full h-full rounded-lg shadow-md [&>.swiper-wrapper]:!ease-linear"
+          >
+            {items3.concat(items2).map(renderSlide)}
           </Swiper>
         </div>
 
