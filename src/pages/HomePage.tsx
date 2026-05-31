@@ -25,11 +25,11 @@ export default function HomePage() {
           if (el) el.scrollIntoView({ behavior: 'smooth' });
         }}
       />
+      <Gallery />
       <PopularFoodItems />
       <Offers />
-      <Gallery />
-      <Features />
       <About />
+      <Features />
       <DeliveryBanner overlapBottom={true} />
       <Feedback />
     </main>

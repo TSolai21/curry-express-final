@@ -1,8 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, EffectCoverflow } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import 'swiper/css/effect-coverflow';
 import { CATEGORIES } from '../data';
 
 // Extract images and names from our menu data
@@ -31,7 +30,7 @@ export default function Gallery() {
 
   return (
     <section className="py-12 md:py-20 bg-warm-white overflow-hidden" id="gallery">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 md:mb-16 text-center">
           <span className="text-xs font-bold tracking-wide text-[#ea580c] block uppercase mb-3">
             Our Moments
@@ -44,16 +43,15 @@ export default function Gallery() {
         {/* Mobile Single Slider (shows all items) */}
         <div className="block md:hidden max-w-[320px] mx-auto w-full">
           <Swiper
-            modules={[Autoplay, EffectCoverflow]}
-            effect="coverflow"
-            coverflowEffect={{ rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: false }}
-            direction="horizontal"
+            modules={[Autoplay]}
+            direction="vertical"
             loop={true}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            speed={1000}
+            autoplay={{ delay: 0, disableOnInteraction: false }}
+            speed={3000}
             slidesPerView={1}
+            spaceBetween={24}
             allowTouchMove={true}
-            className="w-full aspect-[3/4] rounded-2xl shadow-2xl"
+            className="w-full aspect-[3/4] rounded-2xl shadow-2xl [&>.swiper-wrapper]:!ease-linear"
           >
             {allItems.map(renderSlide)}
           </Swiper>
@@ -63,64 +61,60 @@ export default function Gallery() {
         <div className="hidden md:grid md:grid-cols-4 gap-6">
           {/* Slider 1: Vertical Up */}
           <Swiper
-            modules={[Autoplay, EffectCoverflow]}
-            effect="coverflow"
-            coverflowEffect={{ rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: false }}
+            modules={[Autoplay]}
             direction="vertical"
             loop={true}
-            autoplay={{ delay: 4000, disableOnInteraction: false }}
-            speed={1000}
+            autoplay={{ delay: 0, disableOnInteraction: false }}
+            speed={3500}
             slidesPerView={1}
+            spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl"
+            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items1.concat(items1).map(renderSlide)}
           </Swiper>
 
-          {/* Slider 2: Horizontal Left */}
+          {/* Slider 2: Vertical Down */}
           <Swiper
-            modules={[Autoplay, EffectCoverflow]}
-            effect="coverflow"
-            coverflowEffect={{ rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: false }}
-            direction="horizontal"
+            modules={[Autoplay]}
+            direction="vertical"
             loop={true}
-            autoplay={{ delay: 4500, disableOnInteraction: false }}
-            speed={1000}
+            autoplay={{ delay: 0, disableOnInteraction: false, reverseDirection: true }}
+            speed={4000}
             slidesPerView={1}
+            spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl"
+            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items2.concat(items2).map(renderSlide)}
           </Swiper>
 
-          {/* Slider 3: Vertical Down */}
+          {/* Slider 3: Vertical Up */}
           <Swiper
-            modules={[Autoplay, EffectCoverflow]}
-            effect="coverflow"
-            coverflowEffect={{ rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: false }}
+            modules={[Autoplay]}
             direction="vertical"
             loop={true}
-            autoplay={{ delay: 5000, disableOnInteraction: false, reverseDirection: true }}
-            speed={1000}
+            autoplay={{ delay: 0, disableOnInteraction: false }}
+            speed={4500}
             slidesPerView={1}
+            spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl"
+            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items3.concat(items3).map(renderSlide)}
           </Swiper>
 
-          {/* Slider 4: Horizontal Right */}
+          {/* Slider 4: Vertical Down */}
           <Swiper
-            modules={[Autoplay, EffectCoverflow]}
-            effect="coverflow"
-            coverflowEffect={{ rotate: 30, stretch: 0, depth: 100, modifier: 1, slideShadows: false }}
-            direction="horizontal"
+            modules={[Autoplay]}
+            direction="vertical"
             loop={true}
-            autoplay={{ delay: 5500, disableOnInteraction: false, reverseDirection: true }}
-            speed={1000}
+            autoplay={{ delay: 0, disableOnInteraction: false, reverseDirection: true }}
+            speed={5000}
             slidesPerView={1}
+            spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl"
+            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items4.concat(items4).map(renderSlide)}
           </Swiper>
