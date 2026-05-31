@@ -2,31 +2,38 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
-import { CATEGORIES } from '../data';
+import { MENU_ITEMS } from '../data';
 
-// Extract images and names from our menu data
-const allItems = CATEGORIES.filter(c => c.image).map(c => ({
-  src: c.image,
-  name: c.name
+// Extract images and names from our menu data, excluding soups, burgers, and placeholders
+const allItems = MENU_ITEMS.filter(m => m.image && m.category !== 'soups' && m.category !== 'burger-fusions' && !m.image.includes('unsplash')).map(m => ({
+  src: m.image,
+  name: m.name
 }));
-
-// Split them roughly into 4 arrays for the 4 sliders
-const items1 = allItems.slice(0, 4);
-const items2 = allItems.slice(4, 8);
-const items3 = allItems.slice(8, 12);
-const items4 = allItems.slice(11, 15); // Slight overlap to ensure 4 images
 
 export default function Gallery() {
   const renderSlide = (item: { src: string, name: string }, i: number) => (
-    <SwiperSlide key={i} className="h-full relative group cursor-pointer overflow-hidden rounded-2xl">
+    <SwiperSlide key={i} className="h-full relative group overflow-hidden rounded-2xl">
       <img src={item.src} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110" />
-      <div className="absolute inset-0 bg-black/60 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
-        <span className="text-white font-bold text-lg sm:text-xl text-center tracking-widest uppercase translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 drop-shadow-md">
+      <div className="absolute inset-0 bg-black/60 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 text-center">
+        <span className="text-white font-bold text-lg sm:text-xl tracking-widest uppercase translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 drop-shadow-md">
           {item.name}
         </span>
       </div>
     </SwiperSlide>
   );
+
+  // Mobile splits (3 columns)
+  const third = Math.ceil(allItems.length / 3);
+  const mob1 = allItems.slice(0, third);
+  const mob2 = allItems.slice(third, third * 2);
+  const mob3 = allItems.slice(third * 2);
+
+  // Desktop splits (4 columns)
+  const quarter = Math.ceil(allItems.length / 4);
+  const desk1 = allItems.slice(0, quarter);
+  const desk2 = allItems.slice(quarter, quarter * 2);
+  const desk3 = allItems.slice(quarter * 2, quarter * 3);
+  const desk4 = allItems.slice(quarter * 3);
 
   return (
     <section className="py-12 md:py-20 bg-warm-white overflow-hidden" id="gallery">
@@ -57,7 +64,7 @@ export default function Gallery() {
             allowTouchMove={false}
             className="w-full h-full rounded-lg [&>.swiper-wrapper]:!ease-linear"
           >
-            {items1.concat(items4).map(renderSlide)}
+            {mob1.map(renderSlide)}
           </Swiper>
 
           {/* Slider 2: Vertical Down */}
@@ -72,7 +79,7 @@ export default function Gallery() {
             allowTouchMove={false}
             className="w-full h-full rounded-lg [&>.swiper-wrapper]:!ease-linear"
           >
-            {items2.concat(items1).map(renderSlide)}
+            {mob2.map(renderSlide)}
           </Swiper>
 
           {/* Slider 3: Vertical Up */}
@@ -87,7 +94,7 @@ export default function Gallery() {
             allowTouchMove={false}
             className="w-full h-full rounded-lg [&>.swiper-wrapper]:!ease-linear"
           >
-            {items3.concat(items2).map(renderSlide)}
+            {mob3.map(renderSlide)}
           </Swiper>
         </div>
 
@@ -108,7 +115,7 @@ export default function Gallery() {
             allowTouchMove={false}
             className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
-            {items1.concat(items1).map(renderSlide)}
+            {desk1.map(renderSlide)}
           </Swiper>
 
           {/* Slider 2: Vertical Down */}
@@ -123,7 +130,7 @@ export default function Gallery() {
             allowTouchMove={false}
             className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
-            {items2.concat(items2).map(renderSlide)}
+            {desk2.map(renderSlide)}
           </Swiper>
 
           {/* Slider 3: Vertical Up */}
@@ -138,7 +145,7 @@ export default function Gallery() {
             allowTouchMove={false}
             className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
-            {items3.concat(items3).map(renderSlide)}
+            {desk3.map(renderSlide)}
           </Swiper>
 
           {/* Slider 4: Vertical Down */}
@@ -153,7 +160,7 @@ export default function Gallery() {
             allowTouchMove={false}
             className="w-full h-[700px] rounded-2xl [&>.swiper-wrapper]:!ease-linear"
           >
-            {items4.concat(items4).map(renderSlide)}
+            {desk4.map(renderSlide)}
           </Swiper>
         </div>
       </div>
