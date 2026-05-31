@@ -112,17 +112,7 @@ export default function CategoryCard({
                 </p>
             )}
 
-            <div className="flex gap-1 mt-4 z-10">
-                {[...Array(5)].map((_, i) => (
-                    <Star
-                        key={i}
-                        className={`w-4 h-4 transition-colors duration-300 ${i < Math.floor(category.rating)
-                            ? 'fill-amber-400 text-amber-400 group-hover:fill-white group-hover:text-white'
-                            : 'text-stone-300 group-hover:text-white/40'
-                            }`}
-                    />
-                ))}
-            </div>
+
 
             <div className={`absolute bottom-4 sm:bottom-5 left-0 right-0 px-4 sm:px-6 z-10 transition-all duration-300 ease-out ${footerVisibleOnHoverOnly ? 'max-md:opacity-100 max-md:translate-y-0 max-md:pointer-events-auto opacity-0 translate-y-6 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto' : 'opacity-100'}`}>
                 <div className="w-full h-[36px] flex items-center justify-center bg-[#222222] text-white text-sm font-bold rounded-full shadow-md">

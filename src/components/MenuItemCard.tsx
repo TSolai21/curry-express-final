@@ -112,25 +112,7 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
         {item.description}
       </p>
 
-      <div className="flex gap-1 mt-auto z-10 mb-2">
-        {[...Array(5)].map((_, i) => {
-          const filled = i < Math.floor(item.rating);
-          return (
-            <Star
-              key={i}
-              className={`w-4 h-4 transition-colors duration-300 ${
-                filled
-                  ? isActive
-                    ? 'fill-white text-white'
-                    : 'fill-amber-400 text-amber-400 group-hover:fill-white group-hover:text-white'
-                  : isActive
-                    ? 'text-white/40'
-                    : 'text-stone-300 group-hover:text-white/40'
-              }`}
-            />
-          );
-        })}
-      </div>
+
 
       <div
         className={`absolute bottom-4 sm:bottom-5 left-0 right-0 px-4 sm:px-6 z-10 transition-all duration-300 ease-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-6 pointer-events-none max-md:opacity-0'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}
