@@ -41,7 +41,10 @@ export default function Gallery() {
         </div>
 
         {/* Mobile 3-Column Grid */}
-        <div className="md:hidden grid grid-cols-3 gap-2 h-[320px] max-w-md mx-auto px-2 pointer-events-none">
+        <div 
+          className="md:hidden grid grid-cols-3 gap-2 h-[320px] max-w-md mx-auto px-2 pointer-events-none"
+          style={{ WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)', maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)' }}
+        >
           {/* Slider 1: Vertical Up */}
           <Swiper
             modules={[Autoplay]}
@@ -89,7 +92,10 @@ export default function Gallery() {
         </div>
 
         {/* Desktop 4-Column Grid */}
-        <div className="hidden md:grid md:grid-cols-4 gap-6">
+        <div 
+          className="hidden md:grid md:grid-cols-4 gap-6"
+          style={{ WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)', maskImage: 'linear-gradient(to bottom, transparent, black 5%, black 95%, transparent)' }}
+        >
           {/* Slider 1: Vertical Up */}
           <Swiper
             modules={[Autoplay]}
