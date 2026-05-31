@@ -2,7 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import FillHoverButton from './FillHoverButton';
 import { motion } from 'motion/react';
 import burgerImage from '../assets/images/burger_hero_foreground.png';
-import heroBgImage from '../assets/images/hero_bg.png';
+import heroBgImage from '../assets/images/background_home_page.jpeg';
 import { childFadeInUp, easeOut, staggerContainer } from '../utils/motion';
 
 interface HeroProps {
@@ -14,11 +14,11 @@ interface HeroProps {
 export default function Hero({ onViewMenu, onViewOffers, onViewReviews }: HeroProps) {
   const heroContent = {
     subtitle: 'Walden Rd · Montgomery, TX',
-    title: 'Indian & Indo-Chinese Made Fresh Daily',
+    title: 'Where Indian Spice Meets Chinese Sizzle',
     image: burgerImage,
   };
 
-  const accentWords = new Set(['INDIAN', 'FRESH', 'DAILY']);
+  const accentWords = new Set(['INDIAN', 'SPICE', 'CHINESE', 'SIZZLE']);
   const words = heroContent.title.split(' ');
 
   return (

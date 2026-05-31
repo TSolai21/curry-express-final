@@ -37,7 +37,7 @@ export default function Gallery() {
             Our Moments
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold text-stone-900 tracking-tight">
-            Gallery
+            A Feast For Your Eyes
           </h2>
         </div>
 
