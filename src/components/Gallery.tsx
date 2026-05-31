@@ -30,7 +30,7 @@ export default function Gallery() {
 
   return (
     <section className="py-12 md:py-20 bg-warm-white overflow-hidden" id="gallery">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 md:mb-16 text-center">
           <span className="text-xs font-bold tracking-wide text-[#ea580c] block uppercase mb-3">
             Our Moments
@@ -97,10 +97,10 @@ export default function Gallery() {
             loop={true}
             autoplay={{ delay: 0, disableOnInteraction: false }}
             speed={3500}
-            slidesPerView={1}
+            slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items1.concat(items1).map(renderSlide)}
           </Swiper>
@@ -112,10 +112,10 @@ export default function Gallery() {
             loop={true}
             autoplay={{ delay: 0, disableOnInteraction: false, reverseDirection: true }}
             speed={4000}
-            slidesPerView={1}
+            slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items2.concat(items2).map(renderSlide)}
           </Swiper>
@@ -127,10 +127,10 @@ export default function Gallery() {
             loop={true}
             autoplay={{ delay: 0, disableOnInteraction: false }}
             speed={4500}
-            slidesPerView={1}
+            slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items3.concat(items3).map(renderSlide)}
           </Swiper>
@@ -142,10 +142,10 @@ export default function Gallery() {
             loop={true}
             autoplay={{ delay: 0, disableOnInteraction: false, reverseDirection: true }}
             speed={5000}
-            slidesPerView={1}
+            slidesPerView={3}
             spaceBetween={24}
             allowTouchMove={false}
-            className="w-full aspect-[3/4] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
+            className="w-full h-[700px] rounded-2xl shadow-xl [&>.swiper-wrapper]:!ease-linear"
           >
             {items4.concat(items4).map(renderSlide)}
           </Swiper>
