@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Hero from '../components/Hero';
 import Gallery from '../components/Gallery';
 import PopularFoodItems from '../components/PopularFoodItems';
@@ -9,13 +10,12 @@ import DeliveryBanner from '../components/DeliveryBanner';
 import Feedback from '../components/Feedback';
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <main className="flex-1">
       <Hero 
-        onViewMenu={() => {
-          const el = document.getElementById('menu');
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }}
+        onViewMenu={() => navigate('/menu')}
         onViewOffers={() => {
           const el = document.getElementById('offers');
           if (el) el.scrollIntoView({ behavior: 'smooth' });
