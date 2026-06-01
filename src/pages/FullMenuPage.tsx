@@ -54,7 +54,7 @@ export default function FullMenuPage() {
 
       if (bestId && bestId !== activeTab) {
         setActiveTab(bestId);
-        
+
         // Scroll the tab container so the active tab is visible
         const tabEl = document.getElementById(`tab-${bestId}`);
         if (tabEl && tabContainerRef.current) {
@@ -76,7 +76,7 @@ export default function FullMenuPage() {
         }
 
         const headerHeight = headerEl.offsetHeight;
-        
+
         if (window.scrollY >= anchorTop - headerHeight) {
           const pushAmount = Math.min(window.scrollY - (anchorTop - headerHeight), headerHeight);
           headerEl.style.transform = `translateY(-${pushAmount}px)`;
@@ -99,7 +99,7 @@ export default function FullMenuPage() {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       if (rafId !== null) window.cancelAnimationFrame(rafId);
-      
+
       // Reset header transform on unmount
       const headerEl = document.getElementById('app-header');
       if (headerEl) headerEl.style.transform = 'translateY(0px)';
@@ -109,8 +109,8 @@ export default function FullMenuPage() {
   const handleTabClick = (categoryId: string) => {
     const el = document.getElementById(`category-section-${categoryId}`);
     if (el) {
-      // Offset scrolling to account for sticky tabs at top-0 (no header)
-      const y = el.getBoundingClientRect().top + window.scrollY - 60;
+      // Offset scrolling to account for sticky tabs at top-0 plus some breathing room
+      const y = el.getBoundingClientRect().top + window.scrollY - 110;
       window.scrollTo({ top: y, behavior: 'smooth' });
       setActiveTab(categoryId);
     }
@@ -138,13 +138,13 @@ export default function FullMenuPage() {
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          
-          <ul 
+
+          <ul
             ref={tabContainerRef}
             className="flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth whitespace-nowrap py-2 px-4 sm:px-8 -mx-2 sm:-mx-4 flex-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-            style={{ 
+            style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)',
-              maskImage: 'linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)' 
+              maskImage: 'linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)'
             }}
           >
             {CATEGORIES.filter(cat => filteredItemsByCategory.has(cat.id)).map(category => (
@@ -152,11 +152,10 @@ export default function FullMenuPage() {
                 <button
                   id={`tab-${category.id}`}
                   onClick={() => handleTabClick(category.id)}
-                  className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm sm:text-base font-bold transition-all duration-300 border ${
-                    activeTab === category.id
+                  className={`px-4 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm sm:text-base font-bold transition-all duration-300 border ${activeTab === category.id
                       ? 'bg-[#ea580c] text-white border-transparent shadow-md'
                       : 'bg-white text-stone-600 border-stone-200 hover:border-[#ea580c] hover:text-[#ea580c]'
-                  }`}
+                    }`}
                 >
                   {category.name}
                 </button>
@@ -186,8 +185,8 @@ export default function FullMenuPage() {
               if (!items) return null;
 
               return (
-                <section 
-                  key={category.id} 
+                <section
+                  key={category.id}
                   id={`category-section-${category.id}`}
                   ref={el => {
                     if (el) sectionRefs.current.set(category.id, el);
@@ -205,7 +204,7 @@ export default function FullMenuPage() {
                       </p>
                     )}
                   </div>
-                  
+
                   <motion.div
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
                     initial="hidden"
