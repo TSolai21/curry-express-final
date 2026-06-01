@@ -133,7 +133,7 @@ export default function FullMenuPage() {
         <div className="max-w-7xl mx-auto flex items-center gap-2 group/tabs">
           <button
             onClick={() => tabContainerRef.current?.scrollBy({ left: -250, behavior: 'smooth' })}
-            className="shrink-0 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-stone-600 hover:text-[#ea580c] transition-colors border border-stone-100 opacity-0 group-hover/tabs:opacity-100 focus:opacity-100"
+            className="shrink-0 z-10 w-8 h-8 rounded-full bg-white shadow-md hidden md:flex items-center justify-center text-stone-600 hover:text-[#ea580c] transition-colors border border-stone-100 opacity-0 group-hover/tabs:opacity-100 focus:opacity-100"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -166,7 +166,7 @@ export default function FullMenuPage() {
 
           <button
             onClick={() => tabContainerRef.current?.scrollBy({ left: 250, behavior: 'smooth' })}
-            className="shrink-0 z-10 w-8 h-8 rounded-full bg-white shadow-md flex items-center justify-center text-stone-600 hover:text-[#ea580c] transition-colors border border-stone-100 opacity-0 group-hover/tabs:opacity-100 focus:opacity-100"
+            className="shrink-0 z-10 w-8 h-8 rounded-full bg-white shadow-md hidden md:flex items-center justify-center text-stone-600 hover:text-[#ea580c] transition-colors border border-stone-100 opacity-0 group-hover/tabs:opacity-100 focus:opacity-100"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-5 h-5" />
