@@ -25,7 +25,7 @@ export default function MenuSearchInput({
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         aria-label={placeholder}
-        className="w-full min-h-12 pl-12 pr-12 py-3 text-base rounded-full border border-orange-100/80 bg-warm-elevated text-stone-800 placeholder:text-stone-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ea580c]/30 focus:border-[#ea580c] transition-all"
+        className="w-full min-h-12 pl-12 pr-12 py-3 text-base rounded-full border border-orange-100/80 bg-warm-elevated text-stone-800 placeholder:text-stone-600 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ea580c]/30 focus:border-[#ea580c] transition-all [&::-webkit-search-cancel-button]:appearance-none"
       />
       {value && (
         <button

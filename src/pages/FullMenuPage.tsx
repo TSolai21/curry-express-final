@@ -141,7 +141,11 @@ export default function FullMenuPage() {
           
           <ul 
             ref={tabContainerRef}
-            className="flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth whitespace-nowrap py-2 flex-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            className="flex items-center gap-2 sm:gap-3 overflow-x-auto scroll-smooth whitespace-nowrap py-2 px-4 sm:px-8 -mx-2 sm:-mx-4 flex-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            style={{ 
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)',
+              maskImage: 'linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent)' 
+            }}
           >
             {CATEGORIES.filter(cat => filteredItemsByCategory.has(cat.id)).map(category => (
               <li key={category.id}>

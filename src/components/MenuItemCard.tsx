@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { Heart, Star } from 'lucide-react';
 import { MenuItem } from '../types';
@@ -36,6 +36,13 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
     event.currentTarget.style.setProperty('--card-hover-y', `${y}px`);
   };
 
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLikeClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsLiked(!isLiked);
+  };
+
   const handleClick = onClick ?? (() => openDoorDash());
 
   return (
@@ -66,9 +73,9 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
         transition={{ delay: 0.15 + (animationIndex % 6) * 0.05, duration: 0.35 }}
         className="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#222222] shadow-sm flex items-center justify-center text-white transition-colors cursor-pointer z-10 hover:bg-stone-700 group/heart"
         aria-label="Add to Favorites"
-        onClick={(e) => e.stopPropagation()}
+        onClick={handleLikeClick}
       >
-        <Heart className="w-4 h-4 transition-colors group-hover/heart:text-[#ea580c] group-hover/heart:fill-[#ea580c]" />
+        <Heart className={`w-4 h-4 transition-colors ${isLiked ? 'text-[#ea580c] fill-[#ea580c]' : 'group-hover/heart:text-[#ea580c] group-hover/heart:fill-[#ea580c]'}`} />
       </motion.button>
 
       <div className="relative z-10 mx-auto mt-2 mb-3 sm:mb-4 flex h-48 w-48 items-center justify-center sm:h-60 sm:w-60 md:h-72 md:w-72">
