@@ -1,40 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { CATEGORIES } from '../data';
+import { MENU_ITEMS } from '../data';
 import { useNavigate } from 'react-router-dom';
-import CategoryCard from './CategoryCard';
+import MenuItemCard from './MenuItemCard';
 import FillHoverButton from './FillHoverButton';
 import { childFadeInUp, fadeInUp, staggerContainer, viewport } from '../utils/motion';
 
-const TOP_CATEGORIES = CATEGORIES.slice(0, 3);
+const TOP_ITEMS = MENU_ITEMS.filter(item => item.isPopular).slice(0, 3);
+// Fallback if not enough popular items
+const DISPLAY_ITEMS = TOP_ITEMS.length >= 3 ? TOP_ITEMS : MENU_ITEMS.slice(0, 3);
 
 export default function PopularFoodItems() {
-  const [favorites, setFavorites] = useState<string[]>([]);
   const navigate = useNavigate();
-
-  // Load initial favorites from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem('curryexpress-favs');
-    if (saved) {
-      try {
-        setFavorites(JSON.parse(saved));
-      } catch (e) {
-        // ignore
-      }
-    }
-  }, []);
-
-  const toggleFavorite = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation(); // prevent selecting the category or item
-    let updated;
-    if (favorites.includes(id)) {
-      updated = favorites.filter((f) => f !== id);
-    } else {
-      updated = [...favorites, id];
-    }
-    setFavorites(updated);
-    localStorage.setItem('curryexpress-favs', JSON.stringify(updated));
-  };
 
   return (
     <section className="py-12 sm:py-16 md:py-20 bg-warm-white" id="menu">
@@ -53,7 +30,7 @@ export default function PopularFoodItems() {
               Our Menu
             </motion.span>
             <motion.h2 variants={childFadeInUp} className="text-3xl md:text-4xl font-bold text-stone-900 tracking-tight">
-              Browse by category
+              Popular Dishes
             </motion.h2>
             <motion.div variants={childFadeInUp} className="w-12 h-1 bg-[#ea580c] mx-auto md:mx-0 mt-4" />
           </div>
@@ -68,29 +45,20 @@ export default function PopularFoodItems() {
           </motion.div>
         </motion.div>
 
-        {/* Top categories */}
+        {/* Top items */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
           variants={fadeInUp}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-10 sm:mb-16">
-            {TOP_CATEGORIES.map((category, index) => (
-              <CategoryCard
-                key={category.id}
-                category={category}
-                showFavorite
-                isFavorite={favorites.includes(category.id)}
-                onFavoriteToggle={(e) => toggleFavorite(category.id, e)}
-                onClick={() => navigate(`/category/${category.id}`)}
-                footerLabel="View Menu"
-                footerVisibleOnHoverOnly
-                className="w-full min-w-0"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.06, duration: 0.45 }}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-10 sm:mb-16">
+            {DISPLAY_ITEMS.map((item, index) => (
+              <MenuItemCard
+                key={item.id}
+                item={item}
+                animationIndex={index}
+                variants={fadeInUp}
                 whileHover={{ y: -6, transition: { duration: 0.25 } }}
               />
             ))}
