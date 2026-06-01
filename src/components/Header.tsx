@@ -58,7 +58,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled || mobileMenuOpen || !isHome
             ? 'bg-warm-white/95 backdrop-blur-md shadow-md py-3'
             : 'bg-transparent py-5'
@@ -125,7 +125,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
           <button
             type="button"
             aria-label="Close menu overlay"
-            className="fixed inset-0 top-[60px] z-30 bg-stone-950/40 md:hidden cursor-pointer"
+            className="fixed inset-0 top-[60px] z-40 bg-stone-950/40 md:hidden cursor-pointer"
             onClick={() => setMobileMenuOpen(false)}
           />
           <motion.div
@@ -133,7 +133,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 bottom-0 top-[60px] bg-warm-white z-40 md:hidden flex flex-col p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-xl border-t border-warm-border/80 overflow-y-auto overscroll-contain safe-top"
+            className="fixed inset-x-0 bottom-0 top-[60px] bg-warm-white z-50 md:hidden flex flex-col p-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] shadow-xl border-t border-warm-border/80 overflow-y-auto overscroll-contain safe-top"
             id="mobile-nav-panel"
           >
             <div className="flex flex-col space-y-2 mt-2">
