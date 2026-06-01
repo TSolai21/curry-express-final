@@ -115,7 +115,7 @@ const MenuItemCard = forwardRef<HTMLDivElement, MenuItemCardProps>(function Menu
 
 
       <div
-        className={`absolute bottom-4 sm:bottom-5 left-0 right-0 px-4 sm:px-6 z-10 transition-all duration-300 ease-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-6 pointer-events-none max-md:opacity-0'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}
+        className={`absolute bottom-4 sm:bottom-5 left-0 right-0 px-4 sm:px-6 z-10 transition-all duration-300 ease-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-6 pointer-events-none'} group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto max-md:opacity-100 max-md:translate-y-0 max-md:pointer-events-auto`}
       >
         <button
           type="button"
